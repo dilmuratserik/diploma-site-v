@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container-custom {
+  padding: 30px;
+}
+
+.v-text-field.v-text-field--solo .v-input__control{
+  min-height: 10px;
+}
+
+.v-label{
+font-size: 10px;
+}
