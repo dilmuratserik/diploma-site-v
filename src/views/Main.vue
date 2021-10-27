@@ -5,7 +5,9 @@
       app
     >
       <v-list dense>
-        <v-subheader>Galleon Admin</v-subheader>
+        <div class="py-4 px-4">
+          <h4 class="text-lg-h5">Galleon Admin</h4>
+        </div>
         <v-list-item-group
           v-model="selectedItem"
           color="primary"
@@ -13,6 +15,7 @@
           <v-list-item
             v-for="(item, i) in items"
             :key="i"
+            @click="$router.push(item.path)"
           >
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
@@ -45,9 +48,16 @@ export default {
       drawer: null,
       selectedItem: 1,
       items: [
-        { text: 'Real-Time', icon: 'mdi-clock' },
-        { text: 'Audience', icon: 'mdi-account' },
-        { text: 'Conversions', icon: 'mdi-flag' },
+        { text: 'Главная страница', icon: 'mdi-chart-pie', path: '/' },
+        { text: 'Заказы', icon: 'mdi-order-bool-ascending', path: '/orders' },
+        { text: 'Торговые агенты', icon: 'mdi-account-tie', path: '/agents' },
+        { text: 'Торговые точки', icon: 'mdi-map-marker', path: '/ponts' },
+        { text: 'Товары', icon: 'mdi-file-document-edit', path: '' },
+        { text: 'Оплаты', icon: 'mdi-credit-card-outline', path: '/goods' },
+        { text: 'Визиты', icon: 'mdi-clipboard-edit', path: '/visits' },
+        { text: 'Карта', icon: 'mdi-map-check-outline', path: '/map' },
+        { text: 'Сообщение', icon: 'mdi-email', path: '/messages' },
+        { text: 'Настройки', icon: 'mdi-cog-outline', path: '/settings' },
       ],
     }
   }
