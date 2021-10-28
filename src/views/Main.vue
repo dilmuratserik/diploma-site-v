@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-navigation-drawer
+      class="custom-navigation"
       v-model="drawer"
       app
     >
@@ -46,14 +47,14 @@ export default {
   data() {
     return {
       drawer: null,
-      selectedItem: 1,
+      selectedItem: 0,
       items: [
         { text: 'Главная страница', icon: 'mdi-chart-pie', path: '/' },
         { text: 'Заказы', icon: 'mdi-order-bool-ascending', path: '/orders' },
         { text: 'Торговые агенты', icon: 'mdi-account-tie', path: '/agents' },
         { text: 'Торговые точки', icon: 'mdi-map-marker', path: '/ponts' },
-        { text: 'Товары', icon: 'mdi-file-document-edit', path: '' },
-        { text: 'Оплаты', icon: 'mdi-credit-card-outline', path: '/goods' },
+        { text: 'Товары', icon: 'mdi-file-document-edit', path: '/goods' },
+        { text: 'Оплаты', icon: 'mdi-credit-card-outline', path: '/payment' },
         { text: 'Визиты', icon: 'mdi-clipboard-edit', path: '/visits' },
         { text: 'Карта', icon: 'mdi-map-check-outline', path: '/map' },
         { text: 'Сообщение', icon: 'mdi-email', path: '/messages' },
@@ -63,3 +64,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.v-main__wrap {
+  background:  #EEF3F1;
+}
+.custom-navigation {
+  // background: #363740!important;
+}
+</style>

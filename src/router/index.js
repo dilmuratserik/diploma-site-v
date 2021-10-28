@@ -13,7 +13,12 @@ const routes = [
     path: '/orders',
     name: 'Заказы',
     component: () => import('@/views/Orders.vue')
-  }
+  },
+  {
+    path: '/orders/create',
+    name: 'Добавление заказа',
+    component: () => import('@/components/OrdersCreateComponent.vue')
+  },
 ];
 
 const router = new VueRouter({

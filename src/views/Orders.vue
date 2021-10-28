@@ -6,11 +6,8 @@
           <v-col cols="12" lg="3">
             <v-text-field outlined dense></v-text-field>
           </v-col>
-          <v-col cols="12" lg="2">
-            <v-btn
-              depressed
-              color="success"
-            >
+          <v-col cols="12" lg="2" class="d-flex justify-lg-end">
+            <v-btn @click="$router.push('/orders/create')" depressed color="success">
               Добавить заказ
             </v-btn>
           </v-col>
@@ -53,15 +50,6 @@
               dense
             ></v-select>
           </v-col>
-          <!-- <v-col class="d-flex" cols="12" lg="3">
-            <v-text-field
-              v-model="search"
-              append-icon="mdi-magnify"
-              label="Search"
-              single-line
-              outlined
-            ></v-text-field>
-          </v-col> -->
           <v-col class="pr-1" cols="12" lg="2">
             <v-menu
               v-model="menu2"
