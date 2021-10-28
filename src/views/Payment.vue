@@ -5,7 +5,7 @@
         <v-col>
           <v-select
             :items="items"
-            label="Торговый агент"
+            label="Торговая точка"
             height=40
             outlined
             hide-details
@@ -15,7 +15,17 @@
         <v-col>
           <v-select
             :items="items"
-            label="Точка"
+            label="Дата"
+            height=40
+            outlined
+            hide-details
+            dense
+          ></v-select>
+        </v-col>
+        <v-col>
+          <v-select
+            :items="items"
+            label="Тип оплаты"
             height=40
             outlined
             hide-details
@@ -24,7 +34,7 @@
         </v-col>
         <v-col>
           <v-btn class="px-7" color="success">
-            Долг
+            Показать рейтинг
           </v-btn>
         </v-col>
       </v-row>
@@ -32,14 +42,14 @@
         <v-col cols="12" lg="12">
           <v-data-table
             :headers="headers"
-            :items="points"
+            :items="payments"
             :items-per-page="5"
             class="elevation-1"
           ></v-data-table>
         </v-col>
       </v-row>
     </v-card>
-  </Main>  
+  </Main>
 </template>
 
 <script>
@@ -52,19 +62,17 @@ export default {
     return {
       headers: [
         {
-          text: 'Код',
-          value: 'code',
+          text: 'Номер',
+          value: 'number',
         },
-        { text: 'Название', value: 'name' },
-        { text: 'Телефон', value: 'phone' },
+        { text: 'Точка', value: 'name' },
+        { text: 'Дата', value: 'phone' },
         { text: 'Агент', value: 'agent' },
-        { text: 'Регион', value: 'region' },
-        { text: 'Галлеон', value: 'is_galleon' },
-        { text: 'Долг', value: 'duty' },
-        { text: 'Оплата', value: 'payment' },
-        { text: 'Кредит', value: 'credit' }
+        { text: 'Комментарии', value: 'region' },
+        { text: 'Тип оплаты', value: 'is_galleon' },
+        { text: 'Сумма', value: 'duty' },
       ],
-      points: [
+      payments: [
 
       ]
     }

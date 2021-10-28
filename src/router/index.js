@@ -33,6 +33,16 @@ const routes = [
     path: '/points',
     name: 'Торговые точки',
     component: () => import('@/views/Points.vue')
+  },
+  {
+    path: '/goods',
+    name: 'Товары',
+    component: () => import('@/views/Goods.vue')
+  },
+  {
+    path: '/payment',
+    name: 'Оплаты',
+    component: () => import('@/views/Payment.vue')
   }
 ];
 

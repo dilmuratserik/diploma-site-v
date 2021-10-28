@@ -5,7 +5,7 @@
         <h4>Анкета агента</h4>
       </v-row>
       <v-row class="d-flex justify-center" no-gutters>
-        <v-avatar size="70">
+        <v-avatar size="90">
           <img src="@/assets/avatar.png" alt="">
         </v-avatar>
       </v-row>
