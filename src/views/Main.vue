@@ -52,7 +52,7 @@ export default {
         { text: 'Главная страница', icon: 'mdi-chart-pie', path: '/' },
         { text: 'Заказы', icon: 'mdi-order-bool-ascending', path: '/orders' },
         { text: 'Торговые агенты', icon: 'mdi-account-tie', path: '/agents' },
-        { text: 'Торговые точки', icon: 'mdi-map-marker', path: '/ponts' },
+        { text: 'Торговые точки', icon: 'mdi-map-marker', path: '/points' },
         { text: 'Товары', icon: 'mdi-file-document-edit', path: '/goods' },
         { text: 'Оплаты', icon: 'mdi-credit-card-outline', path: '/payment' },
         { text: 'Визиты', icon: 'mdi-clipboard-edit', path: '/visits' },
@@ -69,7 +69,7 @@ export default {
 .v-main__wrap {
   background:  #EEF3F1;
 }
-.custom-navigation {
-  // background: #363740!important;
-}
+// .custom-navigation {
+//   background: #363740!important;
+// }
 </style>

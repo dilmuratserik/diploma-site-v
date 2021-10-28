@@ -19,6 +19,21 @@ const routes = [
     name: 'Добавление заказа',
     component: () => import('@/components/OrdersCreateComponent.vue')
   },
+  {
+    path: '/agents',
+    name: 'Торговые агенты',
+    component: () => import('@/views/Agents.vue')
+  },
+  {
+    path: '/agents/:id',
+    name: 'Edit Agent',
+    component: () => import('@/views/AgentEdit.vue')
+  },
+  {
+    path: '/points',
+    name: 'Торговые точки',
+    component: () => import('@/views/Points.vue')
+  }
 ];
 
 const router = new VueRouter({
