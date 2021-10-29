@@ -6,43 +6,75 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'Главная страница',
-    component: () => import('@/views/Main.vue')
+    name: 'Main',
+    component: () => import('@/views/Main.vue'),
+    meta: {
+      name: 'Главная страница'
+    }
   },
   {
     path: '/orders',
-    name: 'Заказы',
-    component: () => import('@/views/Orders.vue')
+    name: 'orders',
+    component: () => import('@/views/Orders.vue'),
+    meta: {
+      name: 'Заказы'
+    }
   },
   {
     path: '/orders/create',
-    name: 'Добавление заказа',
-    component: () => import('@/components/OrdersCreateComponent.vue')
+    name: 'ordersCreate',
+    component: () => import('@/components/OrdersCreateComponent.vue'),
+    meta: {
+      name: 'Добавление заказа'
+    }
   },
   {
     path: '/agents',
-    name: 'Торговые агенты',
-    component: () => import('@/views/Agents.vue')
+    name: 'agents',
+    component: () => import('@/views/Agents.vue'),
+    meta: {
+      name: 'Торговые агенты'
+    }
   },
   {
     path: '/agents/:id',
-    name: 'Edit Agent',
-    component: () => import('@/views/AgentEdit.vue')
+    name: 'agentsEdit',
+    component: () => import('@/views/AgentEdit.vue'),
+    meta: {
+      name: 'Торговые агенты'
+    }
   },
   {
     path: '/points',
-    name: 'Торговые точки',
-    component: () => import('@/views/Points.vue')
+    name: 'points',
+    component: () => import('@/views/Points.vue'),
+    meta: {
+      name: 'Торговые точки'
+    }
   },
   {
     path: '/goods',
-    name: 'Товары',
-    component: () => import('@/views/Goods.vue')
+    name: 'goods',
+    component: () => import('@/views/Goods.vue'),
+    meta: {
+      name: 'Товары'
+    }
   },
   {
     path: '/payment',
-    name: 'Оплаты',
-    component: () => import('@/views/Payment.vue')
+    name: 'payment',
+    component: () => import('@/views/Payment.vue'),
+    meta: {
+      name: 'Оплаты'
+    }
+  },
+  {
+    path: '/settings',
+    name: 'settings',
+    component: () => import('@/views/Settings.vue'),
+    meta: {
+      name: 'Настройки'
+    }
   }
 ];
 

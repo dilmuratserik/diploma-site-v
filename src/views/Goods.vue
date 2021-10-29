@@ -39,8 +39,114 @@
             :items-per-page="5"
             class="elevation-1"
           >
+            <template v-slot:top>
+              <v-dialog
+                v-model="editDialog"
+              > 
+                <v-card>
+                  <v-card-title>
+                    <v-container>
+                      <span class="text-h6">Анкета товара</span>
+                    </v-container>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row class="d-flex justify-center">
+                        <v-col lg="3">
+                          <v-avatar size="100">
+                            <img src="@/assets/avatar.png" alt="av">
+                          </v-avatar>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          lg="6"
+                        >
+                          <v-text-field
+                            v-model="editedItem.name"
+                            label="Наименование товара"
+                            disabled
+                            outlined
+                          ></v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          lg="6"
+                        >
+                          <v-text-field
+                            v-model="editedItem.code"
+                            label="Код товара"
+                            disabled
+                            outlined
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          lg="6"
+                        >
+                          <v-text-field
+                            v-model="editedItem.article"
+                            label="Артикул товара"
+                            disabled
+                            outlined
+                          ></v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          lg="6"
+                        >
+                          <v-text-field
+                            v-model="editedItem.price"
+                            label="Цена товара"
+                            disabled
+                            outlined
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-col
+                          cols="12"
+                          lg="6"
+                        >
+                          <v-text-field
+                            v-model="editedItem.count"
+                            label="Количество товара"
+                            disabled
+                            outlined
+                          ></v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          lg="6"
+                        >
+                          <v-text-field
+                            v-model="editedItem.status"
+                            label="Статус товара"
+                            disabled
+                            outlined
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                      <v-row class="d-flex justify-end">
+                        <v-col cols="12" lg="6">
+                          <v-btn class="mr-5" @click="editDialog = false" outlined color="success">
+                            Вернуться назад
+                          </v-btn>
+                          <v-btn @click="editDialog = false" color="success">
+                            Сохранить
+                          </v-btn>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                  </v-card-text>
+                </v-card>
+              </v-dialog>
+            </template>
             <template v-slot:[`item.edit`]="{ item }">
-              <v-icon @click="editRow(item)" color="grey" dark>
+              <v-icon @click="editItem(item)" color="grey" dark>
                 mdi-pencil
               </v-icon>
             </template>
@@ -59,6 +165,16 @@ export default {
   },
   data() {
     return {
+      editDialog: false,
+      editedIndex: -1,
+      editedItem: {
+        code: '',
+        name: '',
+        article: '',
+        price: '',
+        count: '',
+        status: '',
+      },
       headers: [
         {
           text: 'Код',
@@ -84,8 +200,10 @@ export default {
     }
   },
   methods: {
-    editRow(id) {
-      console.log(id);
+    editItem(item) {
+      this.editedIndex = this.goods.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.editDialog = true
     }
   }
 }

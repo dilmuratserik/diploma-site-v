@@ -91,9 +91,8 @@
                 hide-details
               ></v-text-field>
             </v-row>
-            <v-row class="mt-5" no-gutters>
+            <v-row>
               <v-text-field
-                class="mr-5"
                 v-model="password"
                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required, rules.min]"

@@ -32,7 +32,7 @@
     <v-app-bar app>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title>{{ $route.name }}</v-toolbar-title>
+      <v-toolbar-title>{{ $route.meta.name }}</v-toolbar-title>
     </v-app-bar>
 
     <div class="container-custom">
@@ -61,6 +61,9 @@ export default {
         { text: 'Настройки', icon: 'mdi-cog-outline', path: '/settings' },
       ],
     }
+  },
+  mounted() {
+    console.log(this.$route);
   }
 }
 </script>
