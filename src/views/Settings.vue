@@ -111,6 +111,111 @@
             </v-col>
           </v-container>
         </v-tab-item>
+        <v-tab-item>
+          <v-container>
+            <v-col
+              cols="12"
+              lg="6"
+            >
+              <v-row>
+                <v-text-field
+                  label="Юридическое название компании"
+                  outlined
+                >
+                </v-text-field>
+              </v-row>
+              <v-row>
+                <v-text-field
+                  label="БИН компании"
+                  outlined
+                >
+                </v-text-field>
+              </v-row>
+              <v-row>
+                <v-text-field
+                  label="Email"
+                  outlined
+                >
+                </v-text-field>
+              </v-row>
+              <v-row>
+                <v-text-field
+                  label="Контактное лицо"
+                  outlined
+                >
+                </v-text-field>
+              </v-row>
+              <v-row>
+                <v-text-field
+                  label="Основной склад"
+                  outlined
+                >
+                </v-text-field>
+              </v-row>
+              <v-row>
+                <v-text-field
+                  label="Минимальная сумма заказа"
+                  outlined
+                >
+                </v-text-field>
+              </v-row>
+              <v-row>
+                <v-select
+                  outlined
+                  label="Единица измерения"
+                >
+                </v-select>
+              </v-row>
+            </v-col>
+            <v-col
+              cols="12"
+              lg="6"
+            >
+              <v-row>
+                 <v-select
+                    outlined
+                    label="Единица измерения"
+                  >
+                </v-select>
+              </v-row>
+              <v-row>
+                 <v-text-field
+                  label="Адрес"
+                  outlined
+                >
+                </v-text-field>
+              </v-row>
+              <v-row>
+                 <v-text-field
+                  label="Адрес"
+                  outlined
+                >
+                </v-text-field>
+              </v-row>
+              <v-row>
+                 <v-select
+                    outlined
+                    label="Основной тип цены"
+                  >
+                </v-select>
+              </v-row>
+              <v-row>
+                 <v-select
+                    outlined
+                    label="Сектор заказов"
+                  >
+                </v-select>
+              </v-row>
+              <v-row>
+                 <v-select
+                    outlined
+                    label="Тип оплаты в заказе"
+                  >
+                </v-select>
+              </v-row>
+            </v-col>
+          </v-container>
+        </v-tab-item>
       </v-tabs-items>
     </v-card>
   </Main>
