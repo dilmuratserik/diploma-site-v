@@ -69,6 +69,14 @@ const routes = [
     }
   },
   {
+    path: '/messages',
+    name: 'messages',
+    component: () => import('@/views/Messages.vue'),
+    meta: {
+      name: 'Сообщение'
+    }
+  },
+  {
     path: '/settings',
     name: 'settings',
     component: () => import('@/views/Settings.vue'),
