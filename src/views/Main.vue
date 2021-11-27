@@ -61,9 +61,6 @@ export default {
         { text: 'Настройки', icon: 'mdi-cog-outline', path: '/settings' },
       ],
     }
-  },
-  mounted() {
-    console.log(this.$route);
   }
 }
 </script>

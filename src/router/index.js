@@ -61,6 +61,14 @@ const routes = [
     }
   },
   {
+    path: '/visits',
+    name: 'visits',
+    component: () => import('@/views/Visits.vue'),
+    meta: {
+      name: 'Визиты'
+    }
+  },
+  {
     path: '/payment',
     name: 'payment',
     component: () => import('@/views/Payment.vue'),
