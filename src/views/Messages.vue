@@ -69,7 +69,6 @@ export default {
         { text: 'Входящие', icon: 'mdi-email' },
         { text: 'Прочитанные', icon: 'mdi-email-open-multiple' },
         { text: 'Отправленные', icon: 'mdi-send' },
-        { text: 'Черновики', icon: 'mdi-file-document' },
         { text: 'Архив', icon: 'mdi-package-down' },
       ]
     }

@@ -239,14 +239,14 @@ export default {
   },
   methods: {
     dateChecked(item, el) {
-      console.log(item, el)
+      console.log(item, el);
     },
     allDateChecked(el) {
-      const temp = el.toString()
+      const temp = el.toString();
       const arr = document.getElementsByClassName(temp);
       console.log(arr);
       for (let i = 0; i < arr.length; i++) {
-        arr[i].click()
+        arr[i].click();
         // console.log(arr[i]);
       }
       // arr.forEach((element) => {

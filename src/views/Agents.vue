@@ -54,6 +54,7 @@
         <v-col cols="12" lg="2">
           <v-btn
             color="success"
+            @click="$router.push('/agents/add')"
           >
             Добавить агента
           </v-btn>
@@ -93,6 +94,7 @@
 </template>
 
 <script>
+import http from "../api/http"
 import Main from '@/views/Main.vue'
 export default {
   components: {
@@ -109,56 +111,32 @@ export default {
           value: 'name',
         },
         { text: 'Телефон', value: 'phone' },
-        { text: 'Специальность', value: 'speciality' },
+        { text: 'Специальность', value: 'role' },
         { text: 'Активен', value: 'online' },
         { text: 'Тип цены', value: 'priceType' },
         { text: 'Регион склада', value: 'regionStorage' },
         { text: 'GPS', value: 'gps' },
         { text: '', value: 'edit' }
       ],
-      agents: [
-        {
-          id: '01',
-          name: 'Маратов Марат',
-          phone: '+77471612324',
-          speciality: 'Торговый агент',
-          online: 'Да',
-          priceType: 'Розничный',
-          regionStorage: 'Склад Алматы',
-          gps: 'Активен',
-        },
-        {
-          id: '02',
-          name: 'Маратов Марат',
-          phone: '+77471612324',
-          speciality: 'Торговый агент',
-          online: 'Да',
-          priceType: 'Розничный',
-          regionStorage: 'Склад Алматы',
-          gps: 'Активен',
-        },
-        {
-          id: '03',
-          name: 'Маратов Марат',
-          phone: '+77471612324',
-          speciality: 'Торговый агент',
-          online: 'Да',
-          priceType: 'Розничный',
-          regionStorage: 'Склад Алматы',
-          gps: 'Активен',
-        },
-        {
-          id: '04',
-          name: 'Маратов Марат',
-          phone: '+77471612324',
-          speciality: 'Торговый агент',
-          online: 'Да',
-          priceType: 'Розничный',
-          regionStorage: 'Склад Алматы',
-          gps: 'Активен',
-        },
-      ]
+      agents: [],
+      items: ['ss', 'ass']
     }
+  },
+  mounted() {
+    http.get('/users/tp/')
+      .then((res) => {
+        res.data.results.forEach(el => {
+          this.agents.push({
+            id: el.id,
+            name: el.name,
+            phone: el.phone,
+            role: el.role === 4 ? 'Курьер' : (el.role === 3 ? 'Торговый агент' : 'None'),
+            online: 'Да',
+            regionStorage: 'Склад Алматы',
+            gps: 'Активен'
+          })
+        });
+      })
   },
   methods: {
     editRow(el) {

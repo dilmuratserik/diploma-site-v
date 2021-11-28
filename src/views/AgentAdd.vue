@@ -2,7 +2,7 @@
   <Main>
     <v-card class="pa-5">
       <v-row no-gutters>
-        <h4>Анкета агента</h4>
+        <h4>Добавление агента</h4>
       </v-row>
       <v-row class="d-flex justify-center" no-gutters>
         <v-avatar size="90">
@@ -13,13 +13,13 @@
         <v-row>
           <v-col cols="12" lg="6">
             <v-row no-gutters>
-              <v-text-field
-                v-model="form.name"
+              <v-select
+                :items="items"
                 label="ФИО"
                 height=40
                 outlined
                 hide-details
-              ></v-text-field>
+              ></v-select>
             </v-row>
             <v-row class="mt-5" no-gutters>
               <v-select
@@ -85,17 +85,15 @@
           <v-col cols="12" lg="6">
             <v-row no-gutters>
               <v-text-field
-                v-model="form.phone"
                 label="Номер телефона"
                 height=40
                 outlined
                 hide-details
               ></v-text-field>
             </v-row>
-            <v-row class="mt-5" no-gutters>
+            <v-row>
               <v-text-field
                 v-model="password"
-                class="mr-2"
                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required, rules.min]"
                 :type="show1 ? 'text' : 'password'"
@@ -106,7 +104,7 @@
                 @click:append="show1 = !show1"
               ></v-text-field>
               <v-text-field
-                v-model="confrimPassword"
+                v-model="password"
                 :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required, rules.min]"
                 :type="show2 ? 'text' : 'password'"
@@ -137,7 +135,6 @@
 </template>
 
 <script>
-import http from "../api/http"
 import Main from '@/views/Main.vue' 
 export default {
   components: {
@@ -153,23 +150,7 @@ export default {
         required: value => !!value || 'Required.',
         min: v => v.length >= 8 || 'Min 8 characters',
       },
-      items: ['s', 'as'],
-      password: '',
-      confrimPassword: '',
-      form: {
-        name: '',
-        phone: '',
-      },
     }
-  },
-  mounted() {
-    http.get(`/users/tp/${this.$route.params.id}`)
-      .then((res) => {
-        this.form = {
-          name: res.data.name,
-          phone: res.data.phone,
-        }
-      })
-  },
+  }
 }
 </script>

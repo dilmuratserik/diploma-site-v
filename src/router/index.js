@@ -50,6 +50,11 @@ const routes = [
     }
   },
   {
+    path: '/agents/add',
+    name: 'addAgent',
+    component: () => import('@/views/AgentAdd.vue')
+  },
+  {
     path: '/points',
     name: 'points',
     component: () => import('@/views/Points.vue'),
