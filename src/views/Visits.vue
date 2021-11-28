@@ -58,7 +58,60 @@
                 ></v-select>
               </v-col>
             </v-row>
-            <div class="table">
+            <v-data-table
+              :headers="headers"
+              :items="tableData"
+              multi-sort
+              hide-default-header
+            >
+              <template v-slot:header="{ props }">
+                <thead>
+                  <tr>
+                    <th
+                      v-for="header in props.headers"
+                      :key="header.text"
+                      style="min-width: 200px"
+                    >
+                      {{ header.text.toUpperCase() }}
+                    </th>
+                    <th v-for="(el, index) in monthData" :key="index">
+                      <div class="column">
+                        <span
+                          >{{ el.dayFullData.getDate() }}.{{
+                            el.dayFullData.getMonth() + 1
+                          }}</span
+                        >
+                        <span>{{ el.weekDay }}</span>
+                        <input
+                          type="checkbox"
+                          @change="allDateChecked(el.dayCount)"
+                        />
+                        <!-- <v-checkbox
+                          v-model="el.checked"
+                          class="mt-1"
+                        ></v-checkbox> -->
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+              </template>
+              <template v-slot:body="{}">
+                <tbody>
+                  <tr v-for="(item, index) in tableData" :key="index">
+                    <td>{{ item.point }}</td>
+                    <td>{{ item.agent }}</td>
+                    <td v-for="(el, inx) in monthData" :key="inx">
+                      <input
+                        type="checkbox"
+                        @change="dateChecked(item, el)"
+                        :class="el.dayCount.toString()"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </template>
+            </v-data-table>
+            <!-- <div class="table">
               <div class="rows">
                 <div v-for="(el, index) in monthData" :key="index" class="column">
                   <span>{{ el.dayFullData.getDate() }}.{{ el.dayFullData.getMonth() + 1}}</span>
@@ -66,7 +119,7 @@
                   <v-checkbox v-model="el.checked" class="mt-1"></v-checkbox>
                 </div>
               </div>
-            </div>
+            </div> -->
           </v-container>
         </v-tab-item>
       </v-tabs-items>
@@ -91,45 +144,114 @@ export default {
       checkbox: false,
       monthData: [],
       todayDate: new Date().getDate(),
-      lastDayOfMonth: '',
-      weekDays: ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
+      lastDayOfMonth: "",
+      weekDays: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+      headers: [
+        {
+          text: "Точка",
+          value: "point",
+        },
+        {
+          text: "Агент",
+          value: "agent",
+        },
+      ],
+      tableData: [
+        {
+          point: "Бегалиев 5, Морошкин магазин",
+          agent: "Маратова Кунсулу",
+        },
+        {
+          point: "Пр. Алтынсарина, 51Б, Пинта на Алтынсарина",
+          agent: "Маратова Кунсулу",
+        },
+      ],
     };
-  },
-  created() {
-    const today = new Date();
-    this.lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate()
-    for (let i = this.todayDate; i < this.lastDayOfMonth + 1; i++) {
-      this.monthData.push({
-        checked: false,
-        dayCount: i,
-        weekDay: this.weekDays[new Date(today.getFullYear(), today.getMonth(), i - 1).getDay()],
-        dayFullData: new Date(today.getFullYear(), today.getMonth(), i)
-      })
-    }
-    if (today.getDate() < 10) {
-      for (let i = 1; i < new Date(today.getFullYear(), today.getMonth() + 2, 0).getDate() + 1; i++) {
-        this.monthData.push({
-          checked: false,
-          dayCount: i,
-          weekDay: this.weekDays[new Date(today.getFullYear(), today.getMonth() + 1, i - 1).getDay()],
-          dayFullData: new Date(today.getFullYear(), today.getMonth() + 1, i)
-        })
-      }
-    } else {
-      for (let i = 1; i < new Date(today.getFullYear(), today.getMonth() + 2, 0).getDate() - (this.lastDayOfMonth - this.todayDate); i++) {
-        this.monthData.push({
-          checked: false,
-          dayCount: i,
-          weekDay: this.weekDays[new Date(today.getFullYear(), today.getMonth() + 1, i - 1).getDay()],
-          dayFullData: new Date(today.getFullYear(), today.getMonth() + 1, i)
-        })
-      }
-    }
   },
   watch: {
     selectedDate: function (el) {
       let date = new Date(el);
       console.log(date.getDay());
+    },
+  },
+  created() {
+    const today = new Date();
+    this.lastDayOfMonth = new Date(
+      today.getFullYear(),
+      today.getMonth() + 1,
+      0
+    ).getDate();
+    for (let i = this.todayDate; i < this.lastDayOfMonth + 1; i++) {
+      this.monthData.push({
+        checked: false,
+        dayCount: i,
+        weekDay:
+          this.weekDays[
+            new Date(today.getFullYear(), today.getMonth(), i - 1).getDay()
+          ],
+        dayFullData: new Date(today.getFullYear(), today.getMonth(), i),
+      });
+    }
+    if (today.getDate() < 10) {
+      for (
+        let i = 1;
+        i <
+        new Date(today.getFullYear(), today.getMonth() + 2, 0).getDate() + 1;
+        i++
+      ) {
+        this.monthData.push({
+          checked: false,
+          dayCount: i,
+          weekDay:
+            this.weekDays[
+              new Date(
+                today.getFullYear(),
+                today.getMonth() + 1,
+                i - 1
+              ).getDay()
+            ],
+          dayFullData: new Date(today.getFullYear(), today.getMonth() + 1, i),
+        });
+      }
+    } else {
+      for (
+        let i = 1;
+        i <
+        new Date(today.getFullYear(), today.getMonth() + 2, 0).getDate() -
+          (this.lastDayOfMonth - this.todayDate);
+        i++
+      ) {
+        this.monthData.push({
+          checked: false,
+          dayCount: i,
+          weekDay:
+            this.weekDays[
+              new Date(
+                today.getFullYear(),
+                today.getMonth() + 1,
+                i - 1
+              ).getDay()
+            ],
+          dayFullData: new Date(today.getFullYear(), today.getMonth() + 1, i),
+        });
+      }
+    }
+  },
+  methods: {
+    dateChecked(item, el) {
+      console.log(item, el)
+    },
+    allDateChecked(el) {
+      const temp = el.toString()
+      const arr = document.getElementsByClassName(temp);
+      console.log(arr);
+      for (let i = 0; i < arr.length; i++) {
+        arr[i].click()
+        // console.log(arr[i]);
+      }
+      // arr.forEach((element) => {
+      //   element.checked = true
+      // })
     },
   },
 };
@@ -146,7 +268,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 5px;
   span {
     font-size: 12px;
   }
