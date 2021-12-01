@@ -6,7 +6,7 @@
       </v-row>
       <v-row class="d-flex justify-center" no-gutters>
         <v-avatar size="90">
-          <img src="@/assets/avatar.png" alt="">
+          <img src="@/assets/avatar.png" alt="" />
         </v-avatar>
       </v-row>
       <v-form class="mt-10">
@@ -16,7 +16,7 @@
               <v-select
                 :items="items"
                 label="ФИО"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
@@ -25,7 +25,7 @@
               <v-select
                 :items="items"
                 label="Специальность"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
@@ -35,14 +35,14 @@
                 class="mr-5"
                 :items="items"
                 label="Тип цены"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
               <v-select
                 :items="items"
                 label="Сектор заказа"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
@@ -52,14 +52,14 @@
                 class="mr-5"
                 :items="items"
                 label="Регион склада"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
               <v-select
                 :items="items"
                 label="Время работы"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
@@ -68,7 +68,7 @@
               <v-select
                 :items="items"
                 label="Разрешить видеть список оплат и заказы?"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
@@ -86,7 +86,7 @@
             <v-row no-gutters>
               <v-text-field
                 label="Номер телефона"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-text-field>
@@ -135,10 +135,10 @@
 </template>
 
 <script>
-import Main from '@/views/Main.vue' 
+import Main from "@/views/Main.vue";
 export default {
   components: {
-    Main
+    Main,
   },
   data() {
     return {
@@ -147,10 +147,10 @@ export default {
       show1: false,
       show2: false,
       rules: {
-        required: value => !!value || 'Required.',
-        min: v => v.length >= 8 || 'Min 8 characters',
+        required: (value) => !!value || "Required.",
+        min: (v) => v.length >= 8 || "Min 8 characters",
       },
-    }
-  }
-}
+    };
+  },
+};
 </script>

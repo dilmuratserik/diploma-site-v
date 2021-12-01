@@ -5,103 +5,103 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Main',
-    component: () => import('@/views/Main.vue'),
+    path: "/",
+    name: "Main",
+    component: () => import("@/views/Main.vue"),
     meta: {
-      name: 'Главная страница'
-    }
+      name: "Главная страница",
+    },
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/Login.vue'),
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/Login.vue"),
   },
   {
-    path: '/orders',
-    name: 'orders',
-    component: () => import('@/views/Orders.vue'),
+    path: "/orders",
+    name: "orders",
+    component: () => import("@/views/Orders.vue"),
     meta: {
-      name: 'Заказы'
-    }
+      name: "Заказы",
+    },
   },
   {
-    path: '/orders/create',
-    name: 'ordersCreate',
-    component: () => import('@/components/OrdersCreateComponent.vue'),
+    path: "/orders/create",
+    name: "ordersCreate",
+    component: () => import("@/components/OrdersCreateComponent.vue"),
     meta: {
-      name: 'Добавление заказа'
-    }
+      name: "Добавление заказа",
+    },
   },
   {
-    path: '/agents',
-    name: 'agents',
-    component: () => import('@/views/Agents.vue'),
+    path: "/agents",
+    name: "agents",
+    component: () => import("@/views/Agents.vue"),
     meta: {
-      name: 'Торговые агенты'
-    }
+      name: "Торговые агенты",
+    },
   },
   {
-    path: '/agents/:id',
-    name: 'agentsEdit',
-    component: () => import('@/views/AgentEdit.vue'),
+    path: "/agents/:id",
+    name: "agentsEdit",
+    component: () => import("@/views/AgentEdit.vue"),
     meta: {
-      name: 'Торговые агенты'
-    }
+      name: "Торговые агенты",
+    },
   },
   {
-    path: '/agents/add',
-    name: 'addAgent',
-    component: () => import('@/views/AgentAdd.vue')
+    path: "/agents/add",
+    name: "addAgent",
+    component: () => import("@/views/AgentAdd.vue"),
   },
   {
-    path: '/points',
-    name: 'points',
-    component: () => import('@/views/Points.vue'),
+    path: "/points",
+    name: "points",
+    component: () => import("@/views/Points.vue"),
     meta: {
-      name: 'Торговые точки'
-    }
+      name: "Торговые точки",
+    },
   },
   {
-    path: '/goods',
-    name: 'goods',
-    component: () => import('@/views/Goods.vue'),
+    path: "/goods",
+    name: "goods",
+    component: () => import("@/views/Goods.vue"),
     meta: {
-      name: 'Товары'
-    }
+      name: "Товары",
+    },
   },
   {
-    path: '/visits',
-    name: 'visits',
-    component: () => import('@/views/Visits.vue'),
+    path: "/visits",
+    name: "visits",
+    component: () => import("@/views/Visits.vue"),
     meta: {
-      name: 'Визиты'
-    }
+      name: "Визиты",
+    },
   },
   {
-    path: '/payment',
-    name: 'payment',
-    component: () => import('@/views/Payment.vue'),
+    path: "/payment",
+    name: "payment",
+    component: () => import("@/views/Payment.vue"),
     meta: {
-      name: 'Оплаты'
-    }
+      name: "Оплаты",
+    },
   },
   {
-    path: '/messages',
-    name: 'messages',
-    component: () => import('@/views/Messages.vue'),
+    path: "/messages",
+    name: "messages",
+    component: () => import("@/views/Messages.vue"),
     meta: {
-      name: 'Сообщение'
-    }
+      name: "Сообщение",
+    },
   },
   {
-    path: '/settings',
-    name: 'settings',
-    component: () => import('@/views/Settings.vue'),
+    path: "/settings",
+    name: "settings",
+    component: () => import("@/views/Settings.vue"),
     meta: {
-      name: 'Настройки'
-    }
-  }
+      name: "Настройки",
+    },
+  },
 ];
 
 const router = new VueRouter({

@@ -6,7 +6,7 @@
           <v-select
             :items="items"
             label="Торговая точка"
-            height=40
+            height="40"
             outlined
             hide-details
             dense
@@ -16,7 +16,7 @@
           <v-select
             :items="items"
             label="Дата"
-            height=40
+            height="40"
             outlined
             hide-details
             dense
@@ -26,16 +26,14 @@
           <v-select
             :items="items"
             label="Тип оплаты"
-            height=40
+            height="40"
             outlined
             hide-details
             dense
           ></v-select>
         </v-col>
         <v-col>
-          <v-btn class="px-7" color="success">
-            Показать рейтинг
-          </v-btn>
+          <v-btn class="px-7" color="success"> Показать рейтинг </v-btn>
         </v-col>
       </v-row>
       <v-row no-gutters>
@@ -53,29 +51,27 @@
 </template>
 
 <script>
-import Main from '@/views/Main.vue'
+import Main from "@/views/Main.vue";
 export default {
   components: {
-    Main
+    Main,
   },
   data() {
     return {
       headers: [
         {
-          text: 'Номер',
-          value: 'number',
+          text: "Номер",
+          value: "number",
         },
-        { text: 'Точка', value: 'name' },
-        { text: 'Дата', value: 'phone' },
-        { text: 'Агент', value: 'agent' },
-        { text: 'Комментарии', value: 'region' },
-        { text: 'Тип оплаты', value: 'is_galleon' },
-        { text: 'Сумма', value: 'duty' },
+        { text: "Точка", value: "name" },
+        { text: "Дата", value: "phone" },
+        { text: "Агент", value: "agent" },
+        { text: "Комментарии", value: "region" },
+        { text: "Тип оплаты", value: "is_galleon" },
+        { text: "Сумма", value: "duty" },
       ],
-      payments: [
-
-      ]
-    }
-  }
-}
+      payments: [],
+    };
+  },
+};
 </script>

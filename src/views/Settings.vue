@@ -1,78 +1,43 @@
 <template>
   <Main>
     <v-card>
-      <v-tabs
-        v-model="tab"
-        fixed-tabs
-      >
+      <v-tabs v-model="tab" fixed-tabs>
         <v-tabs-slider color="yellow"></v-tabs-slider>
 
-        <v-tab
-          v-for="item in items"
-          :key="item"
-        >
+        <v-tab v-for="item in items" :key="item">
           {{ item }}
         </v-tab>
       </v-tabs>
       <v-tabs-items v-model="tab" class="mt-5">
         <v-tab-item>
           <v-container>
-            <v-col
-              cols="12"
-              lg="6"
-            >
+            <v-col cols="12" lg="6">
               <v-row>
-                <v-text-field
-                  label="ФИО директора"
-                  outlined
-                >
+                <v-text-field label="ФИО директора" outlined> </v-text-field>
+              </v-row>
+              <v-row>
+                <v-select outlined label="Пол"> </v-select>
+              </v-row>
+              <v-row>
+                <v-text-field label="Название компании" outlined>
                 </v-text-field>
               </v-row>
               <v-row>
-                <v-select
-                  outlined
-                  label="Пол"
-                >
-
-                </v-select>
-              </v-row>
-               <v-row>
-                <v-text-field
-                  label="Название компании"
-                  outlined
-                >
-                </v-text-field>
-              </v-row>
-              <v-row>
-                <v-btn color="success">
-                  Сохранить
-                </v-btn>
+                <v-btn color="success"> Сохранить </v-btn>
               </v-row>
             </v-col>
           </v-container>
         </v-tab-item>
         <v-tab-item>
           <v-container>
-            <v-col
-              cols="12"
-              lg="6"
-            >
+            <v-col cols="12" lg="6">
               <v-row>
-                <v-text-field
-                  label="Логин"
-                  outlined
-                >
-                </v-text-field>
+                <v-text-field label="Логин" outlined> </v-text-field>
               </v-row>
               <v-row>
-                <v-select
-                  outlined
-                  label="Часовой пояс"
-                >
-
-                </v-select>
+                <v-select outlined label="Часовой пояс"> </v-select>
               </v-row>
-               <v-row>
+              <v-row>
                 <v-text-field
                   class="mr-5"
                   v-model="password"
@@ -104,9 +69,7 @@
                 ></v-switch>
               </v-row>
               <v-row>
-                <v-btn color="success">
-                  Сохранить
-                </v-btn>
+                <v-btn color="success"> Сохранить </v-btn>
               </v-row>
             </v-col>
           </v-container>
@@ -114,90 +77,29 @@
         <v-tab-item>
           <v-container>
             <v-row>
-              <v-col
-                cols="12"
-                lg="6"
-              >
-                <v-text-field
-                  label="Юридическое название компании"
-                  outlined
-                >
+              <v-col cols="12" lg="6">
+                <v-text-field label="Юридическое название компании" outlined>
                 </v-text-field>
-                <v-text-field
-                  label="БИН компании"
-                  outlined
-                >
+                <v-text-field label="БИН компании" outlined> </v-text-field>
+                <v-text-field label="Email" outlined> </v-text-field>
+                <v-text-field label="Контактное лицо" outlined> </v-text-field>
+                <v-text-field label="Основной склад" outlined> </v-text-field>
+                <v-text-field label="Минимальная сумма заказа" outlined>
                 </v-text-field>
-                <v-text-field
-                  label="Email"
-                  outlined
-                >
-                </v-text-field>
-                <v-text-field
-                  label="Контактное лицо"
-                  outlined
-                >
-                </v-text-field>
-                <v-text-field
-                  label="Основной склад"
-                  outlined
-                >
-                </v-text-field>
-                <v-text-field
-                  label="Минимальная сумма заказа"
-                  outlined
-                >
-                </v-text-field>
-                <v-select
-                  outlined
-                  label="Единица измерения"
-                >
-                </v-select>
+                <v-select outlined label="Единица измерения"> </v-select>
               </v-col>
-              <v-col
-                cols="12"
-                lg="6"
-              >
-                <v-select
-                    outlined
-                    label="Регион"
-                  >
-                </v-select>
-                <v-text-field
-                  label="Адрес"
-                  outlined
-                >
-                </v-text-field>
-                <v-text-field
-                  label="Телефон"
-                  outlined
-                >
-                </v-text-field>
-                <v-select
-                    outlined
-                    label="Основной тип цены"
-                  >
-                </v-select>
-                <v-select
-                    outlined
-                    label="Сектор заказов"
-                  >
-                </v-select>
-                <v-select
-                    outlined
-                    label="Тип оплаты в заказе"
-                  >
-                </v-select>
+              <v-col cols="12" lg="6">
+                <v-select outlined label="Регион"> </v-select>
+                <v-text-field label="Адрес" outlined> </v-text-field>
+                <v-text-field label="Телефон" outlined> </v-text-field>
+                <v-select outlined label="Основной тип цены"> </v-select>
+                <v-select outlined label="Сектор заказов"> </v-select>
+                <v-select outlined label="Тип оплаты в заказе"> </v-select>
               </v-col>
             </v-row>
             <v-row>
-              <v-col
-                cols="12"
-                lg="6"
-              >
-                <v-btn color="success">
-                  Сохранить
-                </v-btn>
+              <v-col cols="12" lg="6">
+                <v-btn color="success"> Сохранить </v-btn>
               </v-col>
             </v-row>
           </v-container>
@@ -208,25 +110,23 @@
 </template>
 
 <script>
-import Main from '@/views/Main.vue'
+import Main from "@/views/Main.vue";
 export default {
   components: {
-    Main
+    Main,
   },
   data() {
     return {
       tab: null,
       switch1: false,
-      items: [
-        'Анкетные данные', 'Учетные данные ', 'Данные компании'
-      ],
+      items: ["Анкетные данные", "Учетные данные ", "Данные компании"],
       show1: false,
       show2: false,
       rules: {
-        required: value => !!value || 'Required.',
-        min: v => v.length >= 8 || 'Min 8 characters',
+        required: (value) => !!value || "Required.",
+        min: (v) => v.length >= 8 || "Min 8 characters",
       },
-    }
-  }
-}
+    };
+  },
+};
 </script>

@@ -3,9 +3,7 @@
     <v-card class="pa-4">
       <v-row class="justify-space-between" no-gutters>
         <h4 class="text-lg-h5">Добавление заказ</h4>
-        <v-btn color="grey" class="white--text">
-          Добавить заказ
-        </v-btn>
+        <v-btn color="grey" class="white--text"> Добавить заказ </v-btn>
       </v-row>
       <v-form class="mt-10">
         <v-row no-gutters>
@@ -14,7 +12,7 @@
               <v-select
                 :items="items"
                 label="Торговый агент"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
@@ -23,7 +21,7 @@
               <v-select
                 :items="items"
                 label="Курьер"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
@@ -87,12 +85,8 @@
               </div>
             </div>
             <v-row class="d-flex justify-space-between mt-5" no-gutters>
-              <v-btn>
-                Отменить
-              </v-btn>
-              <v-btn>
-                Добавить товары
-              </v-btn>
+              <v-btn> Отменить </v-btn>
+              <v-btn> Добавить товары </v-btn>
             </v-row>
           </v-col>
           <v-col cols="12" lg="5">
@@ -100,7 +94,7 @@
               <v-select
                 :items="items"
                 label="Торговая точка"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
@@ -110,14 +104,14 @@
                 class="mr-3"
                 :items="items"
                 label="Торговая точка"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
               <v-select
                 :items="items"
                 label="Торговая точка"
-                height=40
+                height="40"
                 outlined
                 hide-details
               ></v-select>
@@ -130,7 +124,7 @@
 </template>
 
 <script>
-import Main from '@/views/Main.vue'
+import Main from "@/views/Main.vue";
 export default {
   components: {
     Main,
@@ -138,10 +132,10 @@ export default {
   data() {
     return {
       orderContent: [],
-      items: ['Foo', 'Bar', 'Fizasddddddd vasdasdz', 'Buzz'],
-    }
-  }
-}
+      items: ["Foo", "Bar", "Fizasddddddd vasdasdz", "Buzz"],
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -150,7 +144,7 @@ export default {
   width: 100%;
   padding: 16px;
   border-radius: 8px;
-  border: 1.2px dashed #DBDBDB;
+  border: 1.2px dashed #dbdbdb;
   p {
     font-size: 16px;
     color: #121212;
@@ -161,7 +155,7 @@ export default {
     justify-content: center;
     min-height: 250px;
     span {
-      color: #9D9D9D;
+      color: #9d9d9d;
       font-size: 14px;
     }
   }

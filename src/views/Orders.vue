@@ -7,7 +7,11 @@
             <v-text-field outlined dense></v-text-field>
           </v-col>
           <v-col cols="12" lg="2" class="d-flex justify-lg-end">
-            <v-btn @click="$router.push('/orders/create')" depressed color="success">
+            <v-btn
+              @click="$router.push('/orders/create')"
+              depressed
+              color="success"
+            >
               Добавить заказ
             </v-btn>
           </v-col>
@@ -17,7 +21,7 @@
             <v-select
               :items="items"
               label="Точка"
-              height=40
+              height="40"
               outlined
               hide-details
               dense
@@ -123,38 +127,88 @@
 </template>
 
 <script>
-import Main from "./Main.vue"
+import Main from "./Main.vue";
 export default {
   components: {
-    Main
+    Main,
   },
   data() {
     return {
       menu2: false,
       menu3: false,
-      search: '',
-      date: '',
-      date2: '',
-      items: ['Foo', 'Bar', 'Fizasddddddd vasdasdz', 'Buzz'],
+      search: "",
+      date: "",
+      date2: "",
+      items: ["Foo", "Bar", "Fizasddddddd vasdasdz", "Buzz"],
       orderHeaders: [
-        { text: 'Номер', value: 'number' },
-        { text: 'Точка', value: 'point' },
-        { text: 'Агент', value: 'agent' },
-        { text: 'Дата', value: 'date' },
-        { text: 'Вид', value: 'type' },
-        { text: 'Статус', value: 'status' },
-        { text: 'Курьер', value: 'delivery' },
-        { text: 'Сумма', value: 'total' },
-        { text: 'Доставка', value: 'deliver' },
+        { text: "Номер", value: "number" },
+        { text: "Точка", value: "point" },
+        { text: "Агент", value: "agent" },
+        { text: "Дата", value: "date" },
+        { text: "Вид", value: "type" },
+        { text: "Статус", value: "status" },
+        { text: "Курьер", value: "delivery" },
+        { text: "Сумма", value: "total" },
+        { text: "Доставка", value: "deliver" },
       ],
       orders: [
-        { number: '45569', point: 'Бегалиев 5, Морошкин магазин', agent: 'Маратов Марат', date: '11.03.2021', type: 'Заказ', status: 'Новый', delivery: 'Ахметкалиев Адиль ', total: '70 000', deliver: '12.03.2021' },
-        { number: '45569', point: 'Бегалиев 5, Морошкин магазин', agent: 'Маратов Марат', date: '11.03.2021', type: 'Заказ', status: 'Новый', delivery: 'Ахметкалиев Адиль ', total: '70 000', deliver: '12.03.2021' },
-        { number: '45569', point: 'Бегалиев 5, Морошкин магазин', agent: 'Маратов Марат', date: '11.03.2021', type: 'Заказ', status: 'Новый', delivery: 'Ахметкалиев Адиль ', total: '70 000', deliver: '12.03.2021' },
-        { number: '45569', point: 'Бегалиев 5, Морошкин магазин', agent: 'Маратов Марат', date: '11.03.2021', type: 'Заказ', status: 'Новый', delivery: 'Ахметкалиев Адиль ', total: '70 000', deliver: '12.03.2021' },
-        { number: '45569', point: 'Бегалиев 5, Морошкин магазин', agent: 'Маратов Марат', date: '11.03.2021', type: 'Заказ', status: 'Новый', delivery: 'Ахметкалиев Адиль ', total: '70 000', deliver: '12.03.2021' }
+        {
+          number: "45569",
+          point: "Бегалиев 5, Морошкин магазин",
+          agent: "Маратов Марат",
+          date: "11.03.2021",
+          type: "Заказ",
+          status: "Новый",
+          delivery: "Ахметкалиев Адиль ",
+          total: "70 000",
+          deliver: "12.03.2021",
+        },
+        {
+          number: "45569",
+          point: "Бегалиев 5, Морошкин магазин",
+          agent: "Маратов Марат",
+          date: "11.03.2021",
+          type: "Заказ",
+          status: "Новый",
+          delivery: "Ахметкалиев Адиль ",
+          total: "70 000",
+          deliver: "12.03.2021",
+        },
+        {
+          number: "45569",
+          point: "Бегалиев 5, Морошкин магазин",
+          agent: "Маратов Марат",
+          date: "11.03.2021",
+          type: "Заказ",
+          status: "Новый",
+          delivery: "Ахметкалиев Адиль ",
+          total: "70 000",
+          deliver: "12.03.2021",
+        },
+        {
+          number: "45569",
+          point: "Бегалиев 5, Морошкин магазин",
+          agent: "Маратов Марат",
+          date: "11.03.2021",
+          type: "Заказ",
+          status: "Новый",
+          delivery: "Ахметкалиев Адиль ",
+          total: "70 000",
+          deliver: "12.03.2021",
+        },
+        {
+          number: "45569",
+          point: "Бегалиев 5, Морошкин магазин",
+          agent: "Маратов Марат",
+          date: "11.03.2021",
+          type: "Заказ",
+          status: "Новый",
+          delivery: "Ахметкалиев Адиль ",
+          total: "70 000",
+          deliver: "12.03.2021",
+        },
       ],
-    }
-  }
-}
+    };
+  },
+};
 </script>

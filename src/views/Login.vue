@@ -76,12 +76,12 @@ export default {
         this.login(data)
           .then((res) => {
             localStorage.setItem("token", res.data.key);
-            this.$refs.form.reset()
-            this.$router.push('/')
+            this.$refs.form.reset();
+            this.$router.push("/");
           })
           .catch((err) => {
             console.log(err);
-            this.$refs.form.reset()
+            this.$refs.form.reset();
           });
       }
     },
