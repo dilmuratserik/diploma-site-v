@@ -15,7 +15,13 @@ function getAgents() {
   return http.get("/users/tp/");
 }
 
+// Points
+function getPoints() {
+  return http.get('/users/point/list/');
+}
+
 session.login = login;
 session.getAgents = getAgents;
+session.getPoints = getPoints;
 
 export default session;

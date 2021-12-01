@@ -5,7 +5,7 @@
         <v-col class="pr-1" cols="12" lg="2">
           <v-select
             :items="items"
-            label="Точка"
+            label="Специальность"
             height="40"
             outlined
             hide-details
@@ -15,7 +15,7 @@
         <v-col class="pr-1" cols="12" lg="2">
           <v-select
             :items="items"
-            label="Агент"
+            label="Тип цены"
             outlined
             hide-details
             dense
@@ -24,7 +24,7 @@
         <v-col class="pr-1" cols="12" lg="2">
           <v-select
             :items="items"
-            label="Курьер"
+            label="Регион склада"
             outlined
             hide-details
             dense
@@ -33,7 +33,7 @@
         <v-col class="pr-1" cols="12" lg="1">
           <v-select
             :items="items"
-            label="Курьер"
+            label="Активен"
             outlined
             hide-details
             dense
@@ -48,18 +48,20 @@
           </v-btn>
         </v-col>
         <v-col cols="12" lg="2">
-          <v-btn color="success" @click="$router.push('/agents/add')">
+          <v-btn color="success" @click="addAgent">
             Добавить агента
           </v-btn>
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" lg="12">
+        <v-col cols="12" lg="12" class="pb-0">
           <v-data-table
             v-model="selected"
             :headers="headers"
             :items="agents"
             :single-select="false"
+            :loading="tableLoading"
+            :loading-text="'Данные загружаются'"
             item-key="name"
             show-select
             class="elevation-1 w-100"
@@ -109,9 +111,11 @@ export default {
       ],
       agents: [],
       items: ["ss", "ass"],
+      tableLoading: false,
     };
   },
   mounted() {
+    this.tableLoading = true
     http.get("/users/tp/").then((res) => {
       res.data.results.forEach((el) => {
         this.agents.push({
@@ -129,12 +133,16 @@ export default {
           gps: "Активен",
         });
       });
+      this.tableLoading = false
     });
   },
   methods: {
     editRow(el) {
       this.$router.push(`/agents/${el.id}`);
     },
+    addAgent() {
+      this.$router.push('/agents/add')
+    }
   },
 };
 </script>

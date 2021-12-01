@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import http from "../api/http";
 import Main from "@/views/Main.vue";
 export default {
   components: {
@@ -51,20 +52,25 @@ export default {
       headers: [
         {
           text: "Код",
-          value: "code",
+          value: "id",
         },
         { text: "Название", value: "name" },
         { text: "Телефон", value: "phone" },
-        { text: "Агент", value: "agent" },
+        { text: "Агент", value: "agent.name" },
         { text: "Регион", value: "region" },
         { text: "Галлеон", value: "is_galleon" },
-        { text: "Долг", value: "duty" },
-        { text: "Оплата", value: "payment" },
+        { text: "Долг", value: "debt" },
+        { text: "Оплата", value: "paymets" },
         { text: "Кредит", value: "credit" },
       ],
       points: [],
       items: ["asd", "asdasd"],
     };
   },
+  mounted() {
+    http.get('/users/admin/point/list/').then((res) => {
+      this.points = res.data.results
+    })
+  }
 };
 </script>

@@ -4,7 +4,7 @@
       <v-row no-gutters>
         <h4>Анкета агента</h4>
       </v-row>
-      <v-row class="d-flex justify-center" no-gutters>
+      <v-row class="d-flex justify-start mt-5" no-gutters>
         <v-avatar size="90">
           <img src="@/assets/avatar.png" alt="" />
         </v-avatar>
@@ -16,8 +16,8 @@
               <v-text-field
                 v-model="form.name"
                 label="ФИО"
-                height="40"
                 outlined
+                dense
                 hide-details
               ></v-text-field>
             </v-row>
@@ -25,8 +25,8 @@
               <v-select
                 :items="items"
                 label="Специальность"
-                height="40"
                 outlined
+                dense
                 hide-details
               ></v-select>
             </v-row>
@@ -35,15 +35,15 @@
                 class="mr-5"
                 :items="items"
                 label="Тип цены"
-                height="40"
                 outlined
+                dense
                 hide-details
               ></v-select>
               <v-select
                 :items="items"
                 label="Сектор заказа"
-                height="40"
                 outlined
+                dense
                 hide-details
               ></v-select>
             </v-row>
@@ -52,15 +52,15 @@
                 class="mr-5"
                 :items="items"
                 label="Регион склада"
-                height="40"
                 outlined
+                dense
                 hide-details
               ></v-select>
               <v-select
                 :items="items"
                 label="Время работы"
-                height="40"
                 outlined
+                dense
                 hide-details
               ></v-select>
             </v-row>
@@ -68,16 +68,16 @@
               <v-select
                 :items="items"
                 label="Разрешить видеть список оплат и заказы?"
-                height="40"
                 outlined
+                dense
                 hide-details
               ></v-select>
             </v-row>
-            <v-row class="mt-5 d-flex justify-space-between" no-gutters>
-              <v-btn @click="$router.push('/agents')" outlined color="success">
+            <v-row class="mt-5 d-flex justify-start" no-gutters>
+              <v-btn class="mr-3" outlined color="success" @click="$router.push('/agents')">
                 Вернуться назад
               </v-btn>
-              <v-btn @click="$router.push('/agents')" color="success">
+              <v-btn color="success" @click="$router.push('/agents')">
                 Сохранить
               </v-btn>
             </v-row>
@@ -87,8 +87,8 @@
               <v-text-field
                 v-model="form.phone"
                 label="Номер телефона"
-                height="40"
                 outlined
+                dense
                 hide-details
               ></v-text-field>
             </v-row>
@@ -103,6 +103,7 @@
                 label="Новый пароль"
                 hint="At least 8 characters"
                 outlined
+                dense
                 @click:append="show1 = !show1"
               ></v-text-field>
               <v-text-field
@@ -114,6 +115,7 @@
                 label="Повторите пароль"
                 hint="At least 8 characters"
                 outlined
+                dense
                 @click:append="show2 = !show2"
               ></v-text-field>
             </v-row>

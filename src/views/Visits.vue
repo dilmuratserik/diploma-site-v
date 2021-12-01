@@ -86,10 +86,6 @@
                           type="checkbox"
                           @change="allDateChecked(el.dayCount)"
                         />
-                        <!-- <v-checkbox
-                          v-model="el.checked"
-                          class="mt-1"
-                        ></v-checkbox> -->
                       </div>
                     </th>
                   </tr>
@@ -102,6 +98,7 @@
                     <td>{{ item.agent }}</td>
                     <td v-for="(el, inx) in monthData" :key="inx">
                       <input
+                        class="table-checkbox"
                         type="checkbox"
                         @change="dateChecked(item, el)"
                         :class="el.dayCount.toString()"
@@ -111,15 +108,6 @@
                 </tbody>
               </template>
             </v-data-table>
-            <!-- <div class="table">
-              <div class="rows">
-                <div v-for="(el, index) in monthData" :key="index" class="column">
-                  <span>{{ el.dayFullData.getDate() }}.{{ el.dayFullData.getMonth() + 1}}</span>
-                  <span>{{ el.weekDay }}</span>
-                  <v-checkbox v-model="el.checked" class="mt-1"></v-checkbox>
-                </div>
-              </div>
-            </div> -->
           </v-container>
         </v-tab-item>
       </v-tabs-items>
@@ -268,8 +256,17 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 10px 5px;
   span {
     font-size: 12px;
   }
+  input {
+    margin-top: 5px;
+  }
+}
+
+.table-checkbox {
+  display: block;
+  margin: 0 auto;
 }
 </style>
