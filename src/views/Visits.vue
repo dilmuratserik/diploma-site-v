@@ -9,7 +9,7 @@
       </v-tabs>
       <v-tabs-items v-model="tab" class="mt-5">
         <v-tab-item>
-          <v-container>
+          <v-container fluid>
             <v-row>
               <v-col lg="3" md="3">
                 <v-menu

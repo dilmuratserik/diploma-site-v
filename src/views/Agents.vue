@@ -48,7 +48,7 @@
           </v-btn>
         </v-col>
         <v-col cols="12" lg="2">
-          <v-btn color="success" @click="addAgent">
+          <v-btn color="success" @click="$router.push('/agents/add')">
             Добавить агента
           </v-btn>
         </v-col>
@@ -68,7 +68,13 @@
           >
             <template v-slot:[`item.name`]="{ item }">
               <v-avatar class="mr-3" color="primary" size="40">
-                <img src="@/assets/avatar.png" alt="" />
+                <img
+                  style="object-fit: cover"
+                  :src="
+                    item.avatar ? item.avatar : require('@/assets/avatar.png')
+                  "
+                  alt="agent_avatar"
+                />
               </v-avatar>
               {{ item.name }}
             </template>
@@ -115,11 +121,13 @@ export default {
     };
   },
   mounted() {
-    this.tableLoading = true
+    this.tableLoading = true;
     http.get("/users/tp/").then((res) => {
+      console.log(res);
       res.data.results.forEach((el) => {
         this.agents.push({
           id: el.id,
+          avatar: el.avatar,
           name: el.name,
           phone: el.phone,
           role:
@@ -133,16 +141,13 @@ export default {
           gps: "Активен",
         });
       });
-      this.tableLoading = false
+      this.tableLoading = false;
     });
   },
   methods: {
     editRow(el) {
       this.$router.push(`/agents/${el.id}`);
     },
-    addAgent() {
-      this.$router.push('/agents/add')
-    }
   },
 };
 </script>

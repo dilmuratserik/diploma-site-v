@@ -13,6 +13,11 @@ async function post_method(url, data) {
   return response;
 }
 
+async function put_method(url, data) {
+  const response = await axios.put(BACK_URL + url, data, { headers: headers });
+  return response;
+}
+
 async function get_method(url, params) {
   console.log();
   const response = await axios.get(BACK_URL + url, {params: params, headers: headers}, );
@@ -21,5 +26,6 @@ async function get_method(url, params) {
 
 http.post = post_method;
 http.get = get_method;
+http.put = put_method;
 
 export default http;

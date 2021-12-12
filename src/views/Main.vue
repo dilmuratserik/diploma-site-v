@@ -1,24 +1,16 @@
 <template>
   <div>
-    <v-navigation-drawer class="custom-navigation" v-model="drawer" app>
+    <v-navigation-drawer v-model="drawer" class="custom-navigation" app>
       <v-list dense>
         <div class="py-4 px-4">
           <h4 class="text-lg-h5">Galleon Admin</h4>
         </div>
-        <v-list-item-group v-model="selectedItem" color="primary">
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            @click="$router.push(item.path)"
-          >
-            <v-list-item-icon>
-              <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.text"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
+        <div class="menu">
+          <router-link v-for="(item, i) in items" :key="i" class="menu__item" :class="{'menu__item-active' : routepath === item.path}" tag="div" :to="item.path">
+            <v-icon v-text="item.icon"></v-icon>
+            <span v-text="item.text"></span>
+          </router-link>
+        </div>
       </v-list>
     </v-navigation-drawer>
 
@@ -39,8 +31,8 @@ export default {
   name: "Main",
   data() {
     return {
-      drawer: null,
-      selectedItem: 0,
+      drawer: true,
+      routepath: this.$route.path,
       items: [
         { text: "Главная страница", icon: "mdi-chart-pie", path: "/" },
         { text: "Заказы", icon: "mdi-order-bool-ascending", path: "/orders" },
@@ -65,4 +57,29 @@ export default {
 // .custom-navigation {
 //   background: #363740!important;
 // }
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px 0;
+  width: 100%;
+  .menu__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding: 10px 30px;
+    cursor: pointer;
+    i {
+      margin-right: 15px;
+    }
+    &:focus {
+      background: #ECEFF1;
+    }
+    &-active {
+      background: #1E88E5;
+    }
+  }
+}
 </style>

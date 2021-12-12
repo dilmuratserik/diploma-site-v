@@ -5,28 +5,38 @@
         <h4>Добавление агента</h4>
       </v-row>
       <v-row class="d-flex justify-center" no-gutters>
-        <v-avatar size="90">
-          <img src="@/assets/avatar.png" alt="" />
-        </v-avatar>
+        <div class="avatar__wrapper">
+          <input type="file" accept="image/*" @change="uploadImage" >
+          <v-avatar size="90" color="#E0E0E0">
+            <img
+              :src="imageUrl ? imageUrl : require('@/assets/noAvatar.svg')"
+              alt="image"
+            />
+          </v-avatar>
+          <a>Добавить фото</a>
+        </div>
       </v-row>
       <v-form class="mt-10">
         <v-row>
           <v-col cols="12" lg="6">
             <v-row no-gutters>
-              <v-select
-                :items="items"
+              <v-text-field
+                v-model="agent.name"
                 label="ФИО"
                 height="40"
                 outlined
+                dense
                 hide-details
-              ></v-select>
+              ></v-text-field>
             </v-row>
             <v-row class="mt-5" no-gutters>
               <v-select
-                :items="items"
+                :items="agentType"
+                v-model="agent.type"
                 label="Специальность"
                 height="40"
                 outlined
+                dense
                 hide-details
               ></v-select>
             </v-row>
@@ -37,6 +47,7 @@
                 label="Тип цены"
                 height="40"
                 outlined
+                dense
                 hide-details
               ></v-select>
               <v-select
@@ -44,97 +55,129 @@
                 label="Сектор заказа"
                 height="40"
                 outlined
+                dense
                 hide-details
               ></v-select>
             </v-row>
             <v-row class="mt-5" no-gutters>
               <v-select
-                class="mr-5"
                 :items="items"
                 label="Регион склада"
                 height="40"
                 outlined
-                hide-details
-              ></v-select>
-              <v-select
-                :items="items"
-                label="Время работы"
-                height="40"
-                outlined
+                dense
                 hide-details
               ></v-select>
             </v-row>
             <v-row class="mt-5" no-gutters>
               <v-select
-                :items="items"
+                :items="showPlan"
+                v-model="agent.showPlan"
                 label="Разрешить видеть список оплат и заказы?"
                 height="40"
                 outlined
+                dense
                 hide-details
               ></v-select>
-            </v-row>
-            <v-row class="mt-5 d-flex justify-space-between" no-gutters>
-              <v-btn @click="$router.push('/agents')" outlined color="success">
-                Вернуться назад
-              </v-btn>
-              <v-btn @click="$router.push('/agents')" color="success">
-                Сохранить
-              </v-btn>
             </v-row>
           </v-col>
           <v-col cols="12" lg="6">
             <v-row no-gutters>
               <v-text-field
+                v-model="agent.phone"
                 label="Номер телефона"
                 height="40"
                 outlined
+                dense
                 hide-details
               ></v-text-field>
             </v-row>
-            <v-row>
-              <v-text-field
-                v-model="password"
-                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                :rules="[rules.required, rules.min]"
-                :type="show1 ? 'text' : 'password'"
-                name="input-10-1"
-                label="Новый пароль"
-                hint="At least 8 characters"
-                outlined
-                @click:append="show1 = !show1"
-              ></v-text-field>
-              <v-text-field
-                v-model="password"
-                :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                :rules="[rules.required, rules.min]"
-                :type="show2 ? 'text' : 'password'"
-                name="input-10-1"
-                label="Повторите пароль"
-                hint="At least 8 characters"
-                outlined
-                @click:append="show2 = !show2"
-              ></v-text-field>
+            <v-row no-gutters class="mt-5">
+              <v-col cols="12" lg="8" class="mr-2">
+                <v-text-field
+                  v-model="agent.password"
+                  label="Генерация пароля"
+                  name="input-10-1"
+                  hide-details
+                  outlined
+                  dense
+                ></v-text-field>
+                <span style="font-size: 12px;">Нажмите кнопку чтобы сгенерировать пароль</span>
+              </v-col>
+              <v-col>
+                <v-btn @click.prevent="generate">
+                  <v-icon>mdi-refresh</v-icon>
+                </v-btn>
+              </v-col>
             </v-row>
-            <v-row no-gutters>
-              <v-switch
-                v-model="switch1"
-                :label="'Привязать к телефону?'"
-              ></v-switch>
+          </v-col>
+        </v-row>
+        <v-divider class="my-5"></v-divider>
+        <v-row>
+          <v-col cols="12" lg="6">
+            <span>Время работы</span>
+            <v-row class="mt-2" style="flex-wrap: no-wrap" no-gutters>
+              <v-col>
+                <v-select
+                  :items="scheduleWork"
+                  :prefix="'C'"
+                  class="mr-5"
+                  v-model="agent.scheduleFrom"
+                  height="40"
+                  outlined
+                  dense
+                  hide-details
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-select
+                  :items="scheduleWork"
+                  :prefix="'По'"
+                  v-model="agent.scheduleFor"
+                  height="40"
+                  outlined
+                  dense
+                  hide-details
+                ></v-select>
+              </v-col>
             </v-row>
-            <v-row no-gutters>
-              <v-switch
-                v-model="switch2"
-                :label="'Включить GPS - геолокацию?'"
-              ></v-switch>
+            <v-row class="mt-5 d-flex justify-space-between" no-gutters>
+              <v-btn @click="$router.push('/agents')" outlined color="success">
+                Вернуться назад
+              </v-btn>
+              <v-btn @click="addAgent" color="success">
+                Сохранить
+              </v-btn>
             </v-row>
           </v-col>
         </v-row>
       </v-form>
     </v-card>
+    <v-snackbar
+      v-model="snackbar.status"
+      :color="snackbar.snackbarColor"
+      absolute
+      top
+      right
+    >
+      {{ snackbar.snackbarText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="white"
+          text
+          v-bind="attrs"
+          @click="snackbar.status = false"
+        >
+          Закрыть
+        </v-btn>
+      </template>
+    </v-snackbar>
   </Main>
 </template>
 
 <script>
+import http from "../api/http";
 import Main from "@/views/Main.vue";
 export default {
   components: {
@@ -142,15 +185,115 @@ export default {
   },
   data() {
     return {
-      switch1: true,
-      switch2: false,
-      show1: false,
-      show2: false,
-      rules: {
-        required: (value) => !!value || "Required.",
-        min: (v) => v.length >= 8 || "Min 8 characters",
+      agent: {
+        name: "",
+        password: "",
+        phone: "",
+        type: null,
+        scheduleFrom: "00:00",
+        scheduleFor: "00:00",
+        showPlan: null,
+        image: null,
       },
+      imageUrl: '',
+      agentType: [
+        { value: 3, text: "Торговый агент" },
+        { value: 4, text: "Курьер" },
+      ],
+      items: ["asd", "asd"],
+      scheduleWork: ["00:00", "01:00"],
+      showPlan: [1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24],
+      characters: "a-z,A-Z,0-9,#",
+      passwordSize: 8,
+      snackbar: {
+        status: false,
+        snackbarText: '',
+        snackbarColor: '',
+      }
     };
+  },
+  methods: {
+    uploadImage(e) {
+      const file = e.target.files[0]
+      this.agent.image = e.target.files[0]
+      this.imageUrl = URL.createObjectURL(file)
+    },
+    addAgent() {
+      let data = new FormData()
+      data.append('avatar', this.agent.image)
+      data.append('name', this.agent.name)
+      data.append('phone', this.agent.phone)
+      data.append('password', this.agent.password)
+      data.append('storage', 1)
+      data.append('type_price', 2)
+      data.append('order_sector', 1)
+      data.append('role', this.agent.type)
+      data.append('show_plan', this.agent.showPlan)
+      data.append('working_hour_with', this.agent.scheduleFrom)
+      data.append('working_hour_until', this.agent.scheduleFor)
+      http.post('/users/tp/', data)
+        .then((res) => {
+          console.log(res)
+          this.snackbar = {
+            status: true,
+            snackbarText: 'Торговый агент успешно добавлен!',
+            snackbarColor: 'success',
+          }
+        })
+        .catch(() => {
+          this.snackbar = {
+            status: true,
+            snackbarText: 'Что-то пошло не так',
+            snackbarColor: 'danger',
+          }
+        })
+    },
+    generate() {
+      let charactersArray = this.characters.split(",");
+      let CharacterSet = "";
+      let password = "";
+      if (charactersArray.indexOf("a-z") >= 0) {
+        CharacterSet += "abcdefghijklmnopqrstuvwxyz";
+      }
+      if (charactersArray.indexOf("A-Z") >= 0) {
+        CharacterSet += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      }
+      if (charactersArray.indexOf("0-9") >= 0) {
+        CharacterSet += "0123456789";
+      }
+
+      for (let i = 0; i < this.passwordSize; i++) {
+        password += CharacterSet.charAt(
+          Math.floor(Math.random() * CharacterSet.length)
+        );
+      }
+      this.$set(this.agent, 'password', password)
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.avatar__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  a {
+    color: #196643;
+    font-weight: bold;
+  }
+  input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    opacity: 0;
+    cursor: pointer;
+  }
+  img {
+    object-fit: cover;
+  }
+}
+</style>

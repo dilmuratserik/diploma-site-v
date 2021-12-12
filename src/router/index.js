@@ -42,17 +42,17 @@ const routes = [
     },
   },
   {
+    path: "/agents/add",
+    name: "addAgent",
+    component: () => import("@/views/AgentAdd.vue"),
+  },
+  {
     path: "/agents/:id",
     name: "agentsEdit",
     component: () => import("@/views/AgentEdit.vue"),
     meta: {
       name: "Торговые агенты",
     },
-  },
-  {
-    path: "/agents/add",
-    name: "addAgent",
-    component: () => import("@/views/AgentAdd.vue"),
   },
   {
     path: "/points",
