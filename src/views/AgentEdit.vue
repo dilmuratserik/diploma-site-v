@@ -45,25 +45,38 @@
               ></v-select>
             </v-row>
             <v-row class="mt-5" no-gutters>
-              <v-select
-                class="mr-5"
-                :items="items"
-                label="Тип цены"
-                outlined
-                dense
-                hide-details
-              ></v-select>
-              <v-select
-                :items="items"
-                label="Сектор заказа"
-                outlined
-                dense
-                hide-details
-              ></v-select>
+              <v-col>
+                <v-select
+                  class="mr-5"
+                  :items="priceTypes"
+                  v-model="agent.priceType"
+                  item-text="name"
+                  item-value="id"
+                  label="Тип цены"
+                  outlined
+                  dense
+                  hide-details
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-select
+                  :items="sectors"
+                  v-model="agent.sector"
+                  item-text="name"
+                  item-value="id"
+                  label="Сектор заказа"
+                  outlined
+                  dense
+                  hide-details
+                ></v-select>
+              </v-col>
             </v-row>
             <v-row class="mt-5" no-gutters>
               <v-select
-                :items="items"
+                :items="storages"
+                v-model="agent.storage"
+                item-text="name"
+                item-value="id"
                 label="Регион склада"
                 outlined
                 dense
@@ -189,6 +202,9 @@ export default {
         name: "",
         phone: "",
         password: "",
+        priceType: "",
+        storage: "",
+        sector: "",
         type: "",
         avatar: "",
         scheduleFrom: "",
@@ -199,7 +215,6 @@ export default {
         { value: 3, text: "Торговый агент" },
         { value: 4, text: "Курьер" },
       ],
-      items: ["s", "as"],
       scheduleWork: ["00:00", "01:00"],
       showPlan: [
         "1",
@@ -224,6 +239,9 @@ export default {
         snackbarColor: "",
       },
       imageUrl: "",
+      storages: [],
+      priceTypes: [],
+      sectors: [],
     };
   },
   mounted() {
@@ -233,11 +251,38 @@ export default {
         name: res.data.name,
         phone: res.data.phone,
         type: res.data.role,
+        storage: res.data.storage,
+        priceType: res.data.type_price,
+        sector: res.data.order_sector,
         showPlan: res.data.show_plan.toString(),
         scheduleFor: res.data.working_hour_until,
         scheduleFrom: res.data.working_hour_with,
       };
     });
+    http
+      .get("/settings/price/type/")
+      .then((res) => {
+        this.priceTypes = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    http
+      .get("/location/storage/")
+      .then((res) => {
+        this.storages = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    http
+      .get("/settings/order/sector/")
+      .then((res) => {
+        this.sectors = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   methods: {
     editAgent() {
@@ -248,9 +293,9 @@ export default {
       data.append("name", this.agent.name);
       data.append("phone", this.agent.phone);
       data.append("password", this.agent.password);
-      data.append("storage", 1);
-      data.append("type_price", 2);
-      data.append("order_sector", 1);
+      data.append("storage", this.agent.storage.id ? this.agent.storage.id : this.agent.storage);
+      data.append("type_price", this.agent.priceType);
+      data.append("order_sector", this.agent.sector);
       data.append("role", this.agent.type);
       data.append("show_plan", this.agent.showPlan);
       data.append("working_hour_with", this.agent.scheduleFrom);

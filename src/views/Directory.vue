@@ -696,7 +696,6 @@ export default {
         .get("/settings/price/type/")
         .then((res) => {
           this.priceTypes = res.data
-          console.log(res);
         })
         .catch((err) => {
           console.log(err);

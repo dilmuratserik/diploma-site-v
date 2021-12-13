@@ -6,7 +6,7 @@
       </v-row>
       <v-row class="d-flex justify-center" no-gutters>
         <div class="avatar__wrapper">
-          <input type="file" accept="image/*" @change="uploadImage" >
+          <input type="file" accept="image/*" @change="uploadImage" />
           <v-avatar size="90" color="#E0E0E0">
             <img
               :src="imageUrl ? imageUrl : require('@/assets/noAvatar.svg')"
@@ -41,27 +41,40 @@
               ></v-select>
             </v-row>
             <v-row class="mt-5" no-gutters>
-              <v-select
-                class="mr-5"
-                :items="items"
-                label="Тип цены"
-                height="40"
-                outlined
-                dense
-                hide-details
-              ></v-select>
-              <v-select
-                :items="items"
-                label="Сектор заказа"
-                height="40"
-                outlined
-                dense
-                hide-details
-              ></v-select>
+              <v-col>
+                <v-select
+                  class="mr-5"
+                  :items="priceTypes"
+                  v-model="agent.priceType"
+                  item-text="name"
+                  item-value="id"
+                  label="Тип цены"
+                  height="40"
+                  outlined
+                  dense
+                  hide-details
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-select
+                  :items="sectors"
+                  v-model="agent.sector"
+                  item-text="name"
+                  item-value="id"
+                  label="Сектор заказа"
+                  height="40"
+                  outlined
+                  dense
+                  hide-details
+                ></v-select>
+              </v-col>
             </v-row>
             <v-row class="mt-5" no-gutters>
               <v-select
-                :items="items"
+                :items="storages"
+                v-model="agent.storage"
+                item-text="name"
+                item-value="id"
                 label="Регион склада"
                 height="40"
                 outlined
@@ -102,7 +115,9 @@
                   outlined
                   dense
                 ></v-text-field>
-                <span style="font-size: 12px;">Нажмите кнопку чтобы сгенерировать пароль</span>
+                <span style="font-size: 12px"
+                  >Нажмите кнопку чтобы сгенерировать пароль</span
+                >
               </v-col>
               <v-col>
                 <v-btn @click.prevent="generate">
@@ -145,9 +160,7 @@
               <v-btn @click="$router.push('/agents')" outlined color="success">
                 Вернуться назад
               </v-btn>
-              <v-btn @click="addAgent" color="success">
-                Сохранить
-              </v-btn>
+              <v-btn @click="addAgent" color="success"> Сохранить </v-btn>
             </v-row>
           </v-col>
         </v-row>
@@ -189,13 +202,16 @@ export default {
         name: "",
         password: "",
         phone: "",
+        priceType: "",
+        storage: "",
+        sector: "",
         type: null,
         scheduleFrom: "00:00",
         scheduleFor: "00:00",
         showPlan: null,
         image: null,
       },
-      imageUrl: '',
+      imageUrl: "",
       agentType: [
         { value: 3, text: "Торговый агент" },
         { value: 4, text: "Курьер" },
@@ -207,46 +223,76 @@ export default {
       passwordSize: 8,
       snackbar: {
         status: false,
-        snackbarText: '',
-        snackbarColor: '',
-      }
+        snackbarText: "",
+        snackbarColor: "",
+      },
+      storages: [],
+      priceTypes: [],
+      sectors: [],
     };
+  },
+  mounted() {
+    http
+      .get("/settings/price/type/")
+      .then((res) => {
+        this.priceTypes = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    http
+      .get("/location/storage/")
+      .then((res) => {
+        this.storages = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    http
+      .get("/settings/order/sector/")
+      .then((res) => {
+        this.sectors = res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   methods: {
     uploadImage(e) {
-      const file = e.target.files[0]
-      this.agent.image = e.target.files[0]
-      this.imageUrl = URL.createObjectURL(file)
+      const file = e.target.files[0];
+      this.agent.image = e.target.files[0];
+      this.imageUrl = URL.createObjectURL(file);
     },
     addAgent() {
-      let data = new FormData()
-      data.append('avatar', this.agent.image)
-      data.append('name', this.agent.name)
-      data.append('phone', this.agent.phone)
-      data.append('password', this.agent.password)
-      data.append('storage', 1)
-      data.append('type_price', 2)
-      data.append('order_sector', 1)
-      data.append('role', this.agent.type)
-      data.append('show_plan', this.agent.showPlan)
-      data.append('working_hour_with', this.agent.scheduleFrom)
-      data.append('working_hour_until', this.agent.scheduleFor)
-      http.post('/users/tp/', data)
+      let data = new FormData();
+      data.append("avatar", this.agent.image);
+      data.append("name", this.agent.name);
+      data.append("phone", this.agent.phone);
+      data.append("password", this.agent.password);
+      data.append("storage", this.agent.storage);
+      data.append("type_price", this.agent.priceType);
+      data.append("order_sector", this.agent.sector);
+      data.append("role", this.agent.type);
+      data.append("show_plan", this.agent.showPlan);
+      data.append("working_hour_with", this.agent.scheduleFrom);
+      data.append("working_hour_until", this.agent.scheduleFor);
+      http
+        .post("/users/tp/", data)
         .then((res) => {
-          console.log(res)
+          console.log(res);
           this.snackbar = {
             status: true,
-            snackbarText: 'Торговый агент успешно добавлен!',
-            snackbarColor: 'success',
-          }
+            snackbarText: "Торговый агент успешно добавлен!",
+            snackbarColor: "success",
+          };
         })
         .catch(() => {
           this.snackbar = {
             status: true,
-            snackbarText: 'Что-то пошло не так',
-            snackbarColor: 'danger',
-          }
-        })
+            snackbarText: "Что-то пошло не так",
+            snackbarColor: "danger",
+          };
+        });
     },
     generate() {
       let charactersArray = this.characters.split(",");
@@ -267,7 +313,7 @@ export default {
           Math.floor(Math.random() * CharacterSet.length)
         );
       }
-      this.$set(this.agent, 'password', password)
+      this.$set(this.agent, "password", password);
     },
   },
 };
