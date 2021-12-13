@@ -95,6 +95,14 @@ const routes = [
     },
   },
   {
+    path: "/directory",
+    name: "directory",
+    component: () => import("@/views/Directory.vue"),
+    meta: {
+      name: "Справочники",
+    },
+  },
+  {
     path: "/settings",
     name: "settings",
     component: () => import("@/views/Settings.vue"),

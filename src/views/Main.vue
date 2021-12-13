@@ -43,6 +43,7 @@ export default {
         { text: "Визиты", icon: "mdi-clipboard-edit", path: "/visits" },
         { text: "Карта", icon: "mdi-map-check-outline", path: "/map" },
         { text: "Сообщение", icon: "mdi-email", path: "/messages" },
+        { text: "Справочники", icon: 'mdi-format-list-bulleted', path: "/directory" },
         { text: "Настройки", icon: "mdi-cog-outline", path: "/settings" },
       ],
     };
