@@ -15,7 +15,7 @@
                 <v-btn
                   class="white--text"
                   color="green"
-                  small
+                  large
                   @click.prevent="dialog.addPriceTypeDialog = true"
                   >Добавить тип цены <v-icon>mdi-plus</v-icon></v-btn
                 >
@@ -54,6 +54,7 @@
                   class="white--text"
                   color="green"
                   small
+                  large
                   @click.prevent="dialog.addStorageDialog = true"
                   >Добавить склад <v-icon>mdi-plus</v-icon></v-btn
                 >
@@ -92,6 +93,7 @@
                   class="white--text"
                   color="green"
                   small
+                  large
                   @click.prevent="dialog.addSectorDialog = true"
                   >Добавить сектор заказа <v-icon>mdi-plus</v-icon></v-btn
                 >

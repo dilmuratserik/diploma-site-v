@@ -71,6 +71,7 @@ export default {
         { text: "Сумма", value: "duty" },
       ],
       payments: [],
+      items: ['asd', 'asd'],
     };
   },
 };

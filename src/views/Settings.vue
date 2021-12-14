@@ -3,7 +3,6 @@
     <v-card>
       <v-tabs v-model="tab" fixed-tabs>
         <v-tabs-slider color="yellow"></v-tabs-slider>
-
         <v-tab v-for="item in items" :key="item">
           {{ item }}
         </v-tab>
@@ -13,17 +12,17 @@
           <v-container>
             <v-col cols="12" lg="6">
               <v-row>
-                <v-text-field label="ФИО директора" outlined> </v-text-field>
+                <v-text-field label="ФИО директора" outlined dense></v-text-field>
               </v-row>
               <v-row>
-                <v-select outlined label="Пол"> </v-select>
+                <v-select outlined label="Пол" dense></v-select>
               </v-row>
               <v-row>
-                <v-text-field label="Название компании" outlined>
+                <v-text-field label="Название компании" outlined dense>
                 </v-text-field>
               </v-row>
               <v-row>
-                <v-btn color="success"> Сохранить </v-btn>
+                <v-btn class="px-10" color="success" large> Сохранить </v-btn>
               </v-row>
             </v-col>
           </v-container>
@@ -32,34 +31,36 @@
           <v-container>
             <v-col cols="12" lg="6">
               <v-row>
-                <v-text-field label="Логин" outlined> </v-text-field>
+                <v-text-field label="Логин" outlined dense> </v-text-field>
               </v-row>
               <v-row>
-                <v-select outlined label="Часовой пояс"> </v-select>
+                <v-select outlined label="Часовой пояс" dense> </v-select>
               </v-row>
               <v-row>
                 <v-text-field
+                  v-model="credentials.password"
                   class="mr-5"
-                  v-model="password"
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  :rules="[rules.required, rules.min]"
-                  :type="show1 ? 'text' : 'password'"
                   name="input-10-1"
                   label="Новый пароль"
                   hint="At least 8 characters"
-                  outlined
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="[rules.required, rules.min]"
+                  :type="show1 ? 'text' : 'password'"
                   @click:append="show1 = !show1"
+                  outlined
+                  dense
                 ></v-text-field>
                 <v-text-field
-                  v-model="password"
-                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-                  :rules="[rules.required, rules.min]"
-                  :type="show2 ? 'text' : 'password'"
+                  v-model="credentials.password"
                   name="input-10-1"
                   label="Повторите пароль"
                   hint="At least 8 characters"
-                  outlined
+                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :rules="[rules.required, rules.min]"
+                  :type="show2 ? 'text' : 'password'"
                   @click:append="show2 = !show2"
+                  outlined
+                  dense
                 ></v-text-field>
               </v-row>
               <v-row no-gutters>
@@ -69,7 +70,7 @@
                 ></v-switch>
               </v-row>
               <v-row>
-                <v-btn color="success"> Сохранить </v-btn>
+                <v-btn class="px-10" color="success" large> Сохранить </v-btn>
               </v-row>
             </v-col>
           </v-container>
@@ -78,28 +79,28 @@
           <v-container>
             <v-row>
               <v-col cols="12" lg="6">
-                <v-text-field label="Юридическое название компании" outlined>
+                <v-text-field label="Юридическое название компании" outlined dense>
                 </v-text-field>
-                <v-text-field label="БИН компании" outlined> </v-text-field>
-                <v-text-field label="Email" outlined> </v-text-field>
-                <v-text-field label="Контактное лицо" outlined> </v-text-field>
-                <v-text-field label="Основной склад" outlined> </v-text-field>
-                <v-text-field label="Минимальная сумма заказа" outlined>
+                <v-text-field label="БИН компании" outlined dense> </v-text-field>
+                <v-text-field label="Email" outlined dense> </v-text-field>
+                <v-text-field label="Контактное лицо" outlined dense> </v-text-field>
+                <v-text-field label="Основной склад" outlined dense> </v-text-field>
+                <v-text-field label="Минимальная сумма заказа" outlined dense>
                 </v-text-field>
-                <v-select outlined label="Единица измерения"> </v-select>
+                <v-select outlined label="Единица измерения" dense> </v-select>
               </v-col>
               <v-col cols="12" lg="6">
-                <v-select outlined label="Регион"> </v-select>
-                <v-text-field label="Адрес" outlined> </v-text-field>
-                <v-text-field label="Телефон" outlined> </v-text-field>
-                <v-select outlined label="Основной тип цены"> </v-select>
-                <v-select outlined label="Сектор заказов"> </v-select>
-                <v-select outlined label="Тип оплаты в заказе"> </v-select>
+                <v-select outlined label="Регион" dense> </v-select>
+                <v-text-field label="Адрес" outlined dense> </v-text-field>
+                <v-text-field label="Телефон" outlined dense> </v-text-field>
+                <v-select outlined label="Основной тип цены" dense> </v-select>
+                <v-select outlined label="Сектор заказов" dense> </v-select>
+                <v-select outlined label="Тип оплаты в заказе" dense> </v-select>
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="12" lg="6">
-                <v-btn color="success"> Сохранить </v-btn>
+                <v-btn class="px-10" color="success" large> Сохранить </v-btn>
               </v-col>
             </v-row>
           </v-container>
@@ -122,6 +123,33 @@ export default {
       items: ["Анкетные данные", "Учетные данные ", "Данные компании"],
       show1: false,
       show2: false,
+      worksheet: {
+        fullName: "",
+        gender: "",
+        companyName: "",
+      },
+      credentials: {
+        login: "",
+        timeZone: "",
+        password: "",
+        passwordConfrim: "",
+      },
+      companyData: {
+        companyFullName: "",
+        region: "",
+        bin: "",
+        address: "",
+        email: "",
+        phone: "",
+        contactPerson: "",
+        mainPriceType: "",
+        mainStorage: "",
+        mainSector: "",
+        orderSectors: "",
+        minOrderTotal: "",
+        typePayment: "",
+        unit: "",
+      },
       rules: {
         required: (value) => !!value || "Required.",
         min: (v) => v.length >= 8 || "Min 8 characters",

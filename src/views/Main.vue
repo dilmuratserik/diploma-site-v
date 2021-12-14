@@ -1,14 +1,27 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" class="custom-navigation" app>
+    <v-navigation-drawer
+      v-model="drawer"
+      class="custom-navigation"
+      color="#363740"
+      app
+    >
       <v-list dense>
-        <div class="py-4 px-4">
-          <h4 class="text-lg-h5">Galleon Admin</h4>
+        <div class="d-flex align-center py-4 px-4">
+          <img width="50" height="50" src="@/assets/logo.svg" alt="">
+          <h4 class="text-lg-h5 white--text">Galleon Admin</h4>
         </div>
         <div class="menu">
-          <router-link v-for="(item, i) in items" :key="i" class="menu__item" :class="{'menu__item-active' : routepath === item.path}" tag="div" :to="item.path">
-            <v-icon v-text="item.icon"></v-icon>
-            <span v-text="item.text"></span>
+          <router-link
+            v-for="(item, i) in items"
+            :key="i"
+            class="menu__item"
+            :class="{ 'menu__item-active': routepath === item.path }"
+            tag="div"
+            :to="item.path"
+          >
+            <v-icon color="#A4A6B3" v-text="item.icon"></v-icon>
+            <span style="color: #A4A6B3" v-text="item.text"></span>
           </router-link>
         </div>
       </v-list>
@@ -43,7 +56,11 @@ export default {
         { text: "Визиты", icon: "mdi-clipboard-edit", path: "/visits" },
         { text: "Карта", icon: "mdi-map-check-outline", path: "/map" },
         { text: "Сообщение", icon: "mdi-email", path: "/messages" },
-        { text: "Справочники", icon: 'mdi-format-list-bulleted', path: "/directory" },
+        {
+          text: "Справочники",
+          icon: "mdi-format-list-bulleted",
+          path: "/directory",
+        },
         { text: "Настройки", icon: "mdi-cog-outline", path: "/settings" },
       ],
     };
@@ -76,10 +93,17 @@ export default {
       margin-right: 15px;
     }
     &:focus {
-      background: #ECEFF1;
+      background: #eceff1;
     }
     &-active {
-      background: #1E88E5;
+      border-left: 3px solid #ffffff;
+      background: rgba($color: #9FA2B4, $alpha: 0.4);
+      span {
+        color: #ffffff !important;
+      }
+      i {
+        color: #ffffff !important;
+      }
     }
   }
 }
