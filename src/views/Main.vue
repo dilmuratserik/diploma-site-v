@@ -47,7 +47,7 @@ export default {
       drawer: true,
       routepath: this.$route.path,
       items: [
-        { text: "Главная страница", icon: "mdi-chart-pie", path: "/" },
+        { text: "Главная страница", icon: "mdi-chart-pie", path: "/dashboard" },
         { text: "Заказы", icon: "mdi-order-bool-ascending", path: "/orders" },
         { text: "Торговые агенты", icon: "mdi-account-tie", path: "/agents" },
         { text: "Торговые точки", icon: "mdi-map-marker", path: "/points" },

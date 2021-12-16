@@ -6,8 +6,17 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
+    redirect: "/dashboard",
     name: "Main",
     component: () => import("@/views/Main.vue"),
+    meta: {
+      name: "Главная страница",
+    },
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("@/views/Dashboard.vue"),
     meta: {
       name: "Главная страница",
     },

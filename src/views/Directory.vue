@@ -132,23 +132,31 @@
         <v-card-title> Склад: {{ editedPriceType.name }} </v-card-title>
         <v-card-text>
           <v-col>
-            <v-row>
-              <v-text-field
-                v-model="editedPriceType.id"
-                label="Код"
-                outlined
-                dense
-                disabled
-              ></v-text-field>
-            </v-row>
-            <v-row>
-              <v-text-field
-                v-model.trim="editedPriceType.name"
-                label="Название"
-                outlined
-                dense
-              ></v-text-field>
-            </v-row>
+            <v-form
+              v-model="editPriceTypeForm"
+              ref="editPriceTypeForm"
+              style="width: 100%"
+              lazy-validation
+            >
+              <v-row>
+                <v-text-field
+                  v-model="editedPriceType.id"
+                  label="Код"
+                  outlined
+                  dense
+                  disabled
+                ></v-text-field>
+              </v-row>
+              <v-row>
+                <v-text-field
+                  v-model.trim="editedPriceType.name"
+                  :rules="[(v) => !!v || 'Данное поле обязательное']"
+                  label="Название"
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-row>
+            </v-form>
           </v-col>
         </v-card-text>
         <v-card-actions>
@@ -177,12 +185,20 @@
         <v-card-text>
           <v-col>
             <v-row>
-              <v-text-field
-                v-model.trim="priceType.name"
-                label="Название"
-                outlined
-                dense
-              ></v-text-field>
+              <v-form
+                v-model="addPriceTypeForm"
+                ref="addPriceTypeForm"
+                style="width: 100%"
+                lazy-validation
+              >
+                <v-text-field
+                  v-model.trim="priceType.name"
+                  label="Название"
+                  :rules="[(v) => !!v || 'Данное поле обязательное']"
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-form>
             </v-row>
           </v-col>
         </v-card-text>
@@ -211,14 +227,22 @@
         <v-card-title> Сектор заказа </v-card-title>
         <v-card-text>
           <v-col>
-            <v-row>
-              <v-text-field
-                v-model.trim="sector.name"
-                label="Название"
-                outlined
-                dense
-              ></v-text-field>
-            </v-row>
+            <v-form
+              v-model="addSectorForm"
+              ref="addSectorForm"
+              style="width: 100%"
+              lazy-validation
+            >
+              <v-row>
+                <v-text-field
+                  v-model.trim="sector.name"
+                  :rules="[(v) => !!v || 'Данное поле обязательное']"
+                  label="Название"
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-row>
+            </v-form>
           </v-col>
         </v-card-text>
         <v-card-actions>
@@ -246,23 +270,31 @@
         <v-card-title> Сектор заказа: {{ editedSector.name }} </v-card-title>
         <v-card-text>
           <v-col>
-            <v-row>
-              <v-text-field
-                v-model="editedSector.id"
-                label="Код"
-                outlined
-                dense
-                disabled
-              ></v-text-field>
-            </v-row>
-            <v-row>
-              <v-text-field
-                v-model.trim="editedSector.name"
-                label="Название"
-                outlined
-                dense
-              ></v-text-field>
-            </v-row>
+            <v-form
+              v-model="editSectorForm"
+              ref="editSectorForm"
+              style="width: 100%"
+              lazy-validation
+            >
+              <v-row>
+                <v-text-field
+                  v-model="editedSector.id"
+                  label="Код"
+                  outlined
+                  dense
+                  disabled
+                ></v-text-field>
+              </v-row>
+              <v-row>
+                <v-text-field
+                  v-model.trim="editedSector.name"
+                  :rules="[(v) => !!v || 'Данное поле обязательное']"
+                  label="Название"
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-row>
+            </v-form>
           </v-col>
         </v-card-text>
         <v-card-actions>
@@ -290,23 +322,31 @@
         <v-card-title> Склад: {{ editedStorage.name }} </v-card-title>
         <v-card-text>
           <v-col>
-            <v-row>
-              <v-text-field
-                v-model="editedStorage.id"
-                label="Код"
-                outlined
-                dense
-                disabled
-              ></v-text-field>
-            </v-row>
-            <v-row>
-              <v-text-field
-                v-model.trim="editedStorage.name"
-                label="Название"
-                outlined
-                dense
-              ></v-text-field>
-            </v-row>
+            <v-form
+              v-model="editStorageForm"
+              ref="editStorageForm"
+              style="width: 100%"
+              lazy-validation
+            >
+              <v-row>
+                <v-text-field
+                  v-model="editedStorage.id"
+                  label="Код"
+                  outlined
+                  dense
+                  disabled
+                ></v-text-field>
+              </v-row>
+              <v-row>
+                <v-text-field
+                  v-model.trim="editedStorage.name"
+                  :rules="[(v) => !!v || 'Данное поле обязательное']"
+                  label="Название"
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-row>
+            </v-form>
           </v-col>
         </v-card-text>
         <v-card-actions>
@@ -334,14 +374,22 @@
         <v-card-title> Склад </v-card-title>
         <v-card-text>
           <v-col>
-            <v-row>
-              <v-text-field
-                v-model.trim="storage.name"
-                label="Название"
-                outlined
-                dense
-              ></v-text-field>
-            </v-row>
+            <v-form
+              v-model="addStorageForm"
+              ref="addStorageForm"
+              style="width: 100%"
+              lazy-validation
+            >
+              <v-row>
+                <v-text-field
+                  v-model.trim="storage.name"
+                  :rules="[(v) => !!v || 'Данное поле обязательное']"
+                  label="Название"
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-row>
+            </v-form>
           </v-col>
         </v-card-text>
         <v-card-actions>
@@ -397,6 +445,12 @@ export default {
   data() {
     return {
       tab: null,
+      addPriceTypeForm: true,
+      editPriceTypeForm: true,
+      addSectorForm: true,
+      editSectorForm: true,
+      addStorageForm: true,
+      editStorageForm: true,
       items: ["Типы цен", "Склады", "Сектор заказа"],
       priceTypesHeader: [
         { text: "Код", value: "id" },
@@ -452,7 +506,7 @@ export default {
         status: false,
         snackbarColor: "success",
         snackbarText: "",
-      }
+      },
     };
   },
   watch: {
@@ -478,76 +532,156 @@ export default {
   },
   methods: {
     fetchAddStorage() {
-      let data = {
-        name: this.storage.name,
-      };
-      http
-        .post("/location/storage/", data)
-        .then(() => {
-          this.dialog.addStorageDialog = false
-          this.getStorages();
-          this.snackbar = {
-            status: true,
-            snackbarColor: "success",
-            snackbarText: "Склад успешно добавлен",
-          }
-        })
-        .catch(() => {
-          this.dialog.addStorageDialog = false
-          this.snackbar = {
-            status: true,
-            snackbarColor: "red",
-            snackbarText: "Что-то пошло не так, попробуйте еще раз",
-          }
-        });
+      if (this.$refs.addStorageForm.validate()) {
+        let data = {
+          name: this.storage.name,
+        };
+        http
+          .post("/location/storage/", data)
+          .then(() => {
+            this.dialog.addStorageDialog = false;
+            this.getStorages();
+            this.snackbar = {
+              status: true,
+              snackbarColor: "success",
+              snackbarText: "Склад успешно добавлен",
+            };
+          })
+          .catch(() => {
+            this.dialog.addStorageDialog = false;
+            this.snackbar = {
+              status: true,
+              snackbarColor: "red",
+              snackbarText: "Что-то пошло не так, попробуйте еще раз",
+            };
+          });
+      }
     },
     fetchAddPriceType() {
-      let data = {
-        name: this.priceType.name,
-      };
-      http
-        .post("/settings/price/type/", data)
-        .then(() => {
-          this.dialog.addPriceTypeDialog = false
-          this.getPriceTypes();
-          this.snackbar = {
-            status: true,
-            snackbarColor: "success",
-            snackbarText: "Тип цены успешно добавлен",
-          }
-        })
-        .catch(() => {
-          this.dialog.addPriceTypeDialog = false
-          this.snackbar = {
-            status: true,
-            snackbarColor: "red",
-            snackbarText: "Что-то пошло не так, попробуйте еще раз",
-          }
-        });
+      if (this.$refs.addPriceTypeForm.validate()) {
+        let data = {
+          name: this.priceType.name,
+        };
+
+        http
+          .post("/settings/price/type/", data)
+          .then(() => {
+            this.dialog.addPriceTypeDialog = false;
+            this.getPriceTypes();
+            this.snackbar = {
+              status: true,
+              snackbarColor: "success",
+              snackbarText: "Тип цены успешно добавлен",
+            };
+            this.$refs.addPriceTypeForm.reset();
+          })
+          .catch(() => {
+            this.dialog.addPriceTypeDialog = false;
+            this.snackbar = {
+              status: true,
+              snackbarColor: "red",
+              snackbarText: "Что-то пошло не так, попробуйте еще раз",
+            };
+          });
+      }
     },
     fecthSectorAdd() {
-      let data = {
-        name: this.sector.name,
-      };
-      http
-        .post("/settings/order/sector/", data)
-        .then(() => {
-          this.dialog.addSectorDialog = false
-          this.getSectors();
-          this.snackbar = {
-            status: true,
-            snackbarColor: "success",
-            snackbarText: "Сектор заказа успешно добавлен",
-          }
-        })
-        .catch(() => {
-          this.dialog.addSectorDialog = false
-          this.snackbar = {
-            status: true,
-            snackbarColor: "red",
-            snackbarText: "Что-то пошло не так, попробуйте еще раз",
-          }
-        });
+      if (this.$refs.addSectorForm.validate()) {
+        let data = {
+          name: this.sector.name,
+        };
+        http
+          .post("/settings/order/sector/", data)
+          .then(() => {
+            this.dialog.addSectorDialog = false;
+            this.getSectors();
+            this.snackbar = {
+              status: true,
+              snackbarColor: "success",
+              snackbarText: "Сектор заказа успешно добавлен",
+            };
+          })
+          .catch(() => {
+            this.dialog.addSectorDialog = false;
+            this.snackbar = {
+              status: true,
+              snackbarColor: "red",
+              snackbarText: "Что-то пошло не так, попробуйте еще раз",
+            };
+          });
+      }
+    },
+    fetchStorageEdited(item) {
+      if (this.$refs.editStorageForm.validate()) {
+        let data = { name: item.name };
+        http
+          .put(`/location/storage/${item.id}/`, data)
+          .then(() => {
+            this.dialog.editStorageDialog = false;
+            this.snackbar = {
+              status: true,
+              snackbarColor: "success",
+              snackbarText: "Склад успешно изменен",
+            };
+            this.getStorages();
+          })
+          .catch(() => {
+            this.dialog.editStorageDialog = false;
+            this.snackbar = {
+              status: true,
+              snackbarColor: "red",
+              snackbarText: "Что-то пошло не так, попробуйте еще раз",
+            };
+          });
+      }
+    },
+    fetchTypePriceEdited(item) {
+      if (this.$refs.editPriceTypeForm.validate()) {
+        let data = { name: item.name };
+        http
+          .put(`/settings/price/type/${item.id}/`, data)
+          .then(() => {
+            this.dialog.editPriceTypeDialog = false;
+            this.snackbar = {
+              status: true,
+              snackbarColor: "success",
+              snackbarText: "Тип цены успешно изменен",
+            };
+            this.getPriceTypes();
+          })
+          .catch(() => {
+            this.dialog.editPriceTypeDialog = false;
+            this.snackbar = {
+              status: true,
+              snackbarColor: "red",
+              snackbarText: "Что-то пошло не так, попробуйте еще раз",
+            };
+          });
+      }
+    },
+    fetchSectorEdited(item) {
+      if (this.$refs.editSectorForm.validate()) {
+        let data = { name: item.name };
+        http
+          .put(`/settings/order/sector/${item.id}/`, data)
+          .then(() => {
+            this.dialog.editSectorDialog = false;
+            this.snackbar = {
+              status: true,
+              snackbarColor: "success",
+              snackbarText: "Сектор заказа успешно изменен",
+            };
+            this.getSectors();
+          })
+          .catch(() => {
+            this.dialog.editSectorDialog = false;
+            this.snackbar = {
+              status: true,
+              snackbarColor: "red",
+              snackbarText: "Что-то пошло не так, попробуйте еще раз",
+            };
+          });
+      }
     },
     editStorage(item) {
       this.editedStorage = {
@@ -559,15 +693,15 @@ export default {
     editPriceType(item) {
       this.editedPriceType = {
         id: item.id,
-        name:  item.name,
-      }
+        name: item.name,
+      };
       this.dialog.editPriceTypeDialog = true;
     },
     editSector(item) {
       this.editedSector = {
         id: item.id,
-        name:  item.name,
-      }
+        name: item.name,
+      };
       this.dialog.editSectorDialog = true;
     },
     deleteStorage(id) {
@@ -579,14 +713,14 @@ export default {
             status: true,
             snackbarColor: "success",
             snackbarText: "Склад успешно удален",
-          }
+          };
         })
         .catch(() => {
           this.snackbar = {
             status: true,
             snackbarColor: "red",
             snackbarText: "Что-то пошло не так, попробуйте еще раз",
-          }
+          };
         });
     },
     deletePriceType(id) {
@@ -598,14 +732,14 @@ export default {
             status: true,
             snackbarColor: "success",
             snackbarText: "Тип цены успешно удален",
-          }
+          };
         })
         .catch(() => {
           this.snackbar = {
             status: true,
             snackbarColor: "red",
             snackbarText: "Что-то пошло не так, попробуйте еще раз",
-          }
+          };
         });
     },
     deleteSector(id) {
@@ -617,87 +751,21 @@ export default {
             status: true,
             snackbarColor: "success",
             snackbarText: "Сектор заказ успешно удален",
-          }
+          };
         })
         .catch(() => {
           this.snackbar = {
             status: true,
             snackbarColor: "red",
             snackbarText: "Что-то пошло не так, попробуйте еще раз",
-          }
-        });
-    } ,
-    fetchStorageEdited(item) {
-      let data = { name: item.name };
-      http
-        .put(`/location/storage/${item.id}/`, data)
-        .then(() => {
-          this.dialog.editStorageDialog = false
-          this.snackbar = {
-            status: true,
-            snackbarColor: "success",
-            snackbarText: "Склад успешно изменен",
-          }
-          this.getStorages();
-        })
-        .catch(() => {
-          this.dialog.editStorageDialog = false
-          this.snackbar = {
-            status: true,
-            snackbarColor: "red",
-            snackbarText: "Что-то пошло не так, попробуйте еще раз",
-          }
-        });
-    },
-    fetchTypePriceEdited(item) {
-      let data = { name: item.name };
-      http
-        .put(`/settings/price/type/${item.id}/`, data)
-        .then(() => {
-          this.dialog.editPriceTypeDialog = false
-          this.snackbar = {
-            status: true,
-            snackbarColor: "success",
-            snackbarText: "Тип цены успешно изменен",
-          }
-          this.getPriceTypes();
-        })
-        .catch(() => {
-          this.dialog.editPriceTypeDialog = false
-          this.snackbar = {
-            status: true,
-            snackbarColor: "red",
-            snackbarText: "Что-то пошло не так, попробуйте еще раз",
-          }
-        });
-    },
-    fetchSectorEdited(item) {
-      let data = { name: item.name };
-      http
-        .put(`/settings/order/sector/${item.id}/`, data)
-        .then(() => {
-          this.dialog.editSectorDialog = false
-          this.snackbar = {
-            status: true,
-            snackbarColor: "success",
-            snackbarText: "Сектор заказа успешно изменен",
-          }
-          this.getSectors();
-        })
-        .catch(() => {
-          this.dialog.editSectorDialog = false
-          this.snackbar = {
-            status: true,
-            snackbarColor: "red",
-            snackbarText: "Что-то пошло не так, попробуйте еще раз",
-          }
+          };
         });
     },
     getPriceTypes() {
       http
         .get("/settings/price/type/")
         .then((res) => {
-          this.priceTypes = res.data
+          this.priceTypes = res.data;
         })
         .catch((err) => {
           console.log(err);
@@ -717,7 +785,7 @@ export default {
       http
         .get("/settings/order/sector/")
         .then((res) => {
-          this.sectors = res.data
+          this.sectors = res.data;
         })
         .catch((err) => {
           console.log(err);
