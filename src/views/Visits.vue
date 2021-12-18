@@ -1,14 +1,23 @@
 <template>
   <Main>
     <v-card>
-      <v-tabs v-model="tab" fixed-tabs>
-        <v-tabs-slider color="yellow"></v-tabs-slider>
+      <v-tabs
+        v-model="tab"
+        class="w-100"
+        fixed-tabs
+        center-active
+        centered
+        hide-slider
+        height="80"
+        color="#5C5C5C"
+        background-color="#1966431A"
+      >
         <v-tab v-for="item in items" :key="item">
           {{ item }}
         </v-tab>
       </v-tabs>
       <v-tabs-items v-model="tab" class="mt-5">
-        <v-tab-item>
+        <v-tab-item active-class="tab-active">
           <v-container fluid>
             <v-row>
               <v-col lg="3" md="3">
@@ -41,14 +50,22 @@
               </v-col>
               <v-col lg="3" md="3">
                 <v-select
-                  :items="itemsSelect"
+                  :items="agents"
+                  v-model="selectAgentId"
+                  item-text="name"
+                  item-value="id"
                   label="Торговый агент"
                   outlined
                   hide-details
                   dense
                 ></v-select>
               </v-col>
-              <v-col lg="3" md="3">
+              <v-col>
+                <v-btn color="green" @click.prevent="fetchApplyPlan"
+                  >Применить</v-btn
+                >
+              </v-col>
+              <!-- <v-col lg="3" md="3">
                 <v-select
                   :items="itemsSelect"
                   label="Точка"
@@ -56,11 +73,11 @@
                   hide-details
                   dense
                 ></v-select>
-              </v-col>
+              </v-col> -->
             </v-row>
             <v-data-table
               :headers="headers"
-              :items="tableData"
+              :items="plans"
               multi-sort
               hide-default-header
             >
@@ -93,9 +110,8 @@
               </template>
               <template v-slot:body="{}">
                 <tbody>
-                  <tr v-for="(item, index) in tableData" :key="index">
-                    <td>{{ item.point }}</td>
-                    <td>{{ item.agent }}</td>
+                  <tr v-for="(item, index) in plans" :key="index">
+                    <td>{{ item.name }}</td>
                     <td v-for="(el, inx) in monthData" :key="inx">
                       <input
                         class="table-checkbox"
@@ -110,6 +126,44 @@
             </v-data-table>
           </v-container>
         </v-tab-item>
+        <v-tab-item>
+          <v-container fluid>
+            <v-row>
+              <v-col>
+                <v-select
+                  :items="itemsSelect"
+                  label="Торговый агент"
+                  outlined
+                  hide-details
+                  dense
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-select
+                  :items="itemsSelect"
+                  label="Точка"
+                  outlined
+                  hide-details
+                  dense
+                ></v-select>
+              </v-col>
+              <v-col>
+                <v-btn class="white--text mr-5 px-6" color="#D0A341"
+                  >Факт</v-btn
+                >
+                <v-btn color="#D0A341" outlined>План</v-btn>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-data-table
+                :headers="headersFact"
+                :items="facts"
+                style="width: 100%"
+                class="elevation-1 mt-5"
+              ></v-data-table>
+            </v-row>
+          </v-container>
+        </v-tab-item>
       </v-tabs-items>
     </v-card>
   </Main>
@@ -117,6 +171,7 @@
 
 <script>
 import Main from "./Main.vue";
+import http from "@/api/http.js";
 export default {
   name: "Visits",
   components: {
@@ -139,21 +194,38 @@ export default {
           text: "Точка",
           value: "point",
         },
-        {
-          text: "Агент",
-          value: "agent",
-        },
       ],
-      tableData: [
+      headersFact: [
         {
-          point: "Бегалиев 5, Морошкин магазин",
-          agent: "Маратова Кунсулу",
+          text: "Код",
+          value: "id",
         },
         {
-          point: "Пр. Алтынсарина, 51Б, Пинта на Алтынсарина",
-          agent: "Маратова Кунсулу",
+          text: "Точка",
+          value: "point.name",
         },
+        {
+          text: "Торговый агент",
+          value: "agent.name",
+        },
+        {
+          text: "Дата",
+          value: "date",
+        },
+        {
+          text: "Комментарий",
+          value: "comment",
+        },
+        {
+          text: "План",
+          value: "plan",
+        },
+        { text: "Факт", value: "fact" },
       ],
+      selectAgentId: "",
+      facts: [],
+      plans: [],
+      agents: [],
     };
   },
   watch: {
@@ -225,9 +297,38 @@ export default {
       }
     }
   },
+  mounted() {
+    http.get("/users/tp/").then((res) => {
+      this.agents = res.data.results.filter((el) => el.role === 3);
+    });
+    http.get("/order/schedule/list/").then((res) => {
+      this.facts = res.data.results
+    });
+  },
   methods: {
+    fetchApplyPlan() {
+      this.fetchTP();
+    },
+    fetchTP() {
+      http.get("/users/admin/point/list/").then((res) => {
+        this.plans = res.data.results;
+      });
+    },
     dateChecked(item, el) {
-      console.log(item, el);
+      let date = `${el.dayFullData.getFullYear()}-${el.dayFullData.getMonth()}-${el.dayFullData.getDay() < 10 ? '0'+el.dayFullData.getDay() : el.dayFullData.getDay()}`
+      let data = {
+        agent: this.selectAgentId,
+        point: item.id,
+        date: date,
+      };
+      http
+        .post("/order/plan/", data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     allDateChecked(el) {
       const temp = el.toString();
@@ -235,11 +336,7 @@ export default {
       console.log(arr);
       for (let i = 0; i < arr.length; i++) {
         arr[i].click();
-        // console.log(arr[i]);
       }
-      // arr.forEach((element) => {
-      //   element.checked = true
-      // })
     },
   },
 };
@@ -268,5 +365,25 @@ export default {
 .table-checkbox {
   display: block;
   margin: 0 auto;
+}
+
+.v-tab--active {
+  background-color: #ffffff;
+  font-weight: bold;
+  font-size: 16px;
+  color: #000 !important;
+  border-radius: 8px 8px 0 0;
+  &:hover {
+    background: #ffffff !important;
+  }
+}
+
+.v-tab {
+  width: 100% !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+  &:hover {
+    background: transparent !important;
+  }
 }
 </style>

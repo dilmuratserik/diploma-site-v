@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { mapActions } from "vuex";
 export default {
   data() {
@@ -75,7 +76,8 @@ export default {
         };
         this.login(data)
           .then((res) => {
-            localStorage.setItem("token", res.data.key);
+            sessionStorage.setItem("token", res.data.key);
+            axios.defaults.headers.common['Authorization'] = 'Token ' + res.data.key
             this.$refs.form.reset();
             this.$router.push("/");
           })

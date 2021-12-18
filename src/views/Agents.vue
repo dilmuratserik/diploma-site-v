@@ -186,10 +186,10 @@ export default {
               ? "Торговый агент"
               : "None",
           online: "Да",
-          regionStorage: el.storage.name,
+          // regionStorage: el.storage.name,
           gps: "Активен",
         });
-      });
+      })
       this.tableLoading = false;
     });
     },

@@ -1,7 +1,17 @@
 <template>
   <Main>
     <v-card>
-      <v-tabs v-model="tab" fixed-tabs>
+      <v-tabs
+        v-model="tab"
+        class="w-100"
+        fixed-tabs
+        center-active
+        centered
+        hide-slider
+        height="80"
+        color="#5C5C5C"
+        background-color="#1966431A"
+      >
         <v-tabs-slider color="yellow"></v-tabs-slider>
         <v-tab v-for="item in items" :key="item">
           {{ item }}
@@ -158,3 +168,24 @@ export default {
   },
 };
 </script>
+
+
+<style lang="scss" scoped>
+.v-tab--active {
+  background-color: #ffffff;
+  color: #000!important;
+  border-radius: 8px 8px 0 0;
+  &:hover {
+    background: #ffffff !important;
+  }
+}
+
+.v-tab {
+  width: 100% !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+  &:hover {
+    background: transparent !important;
+  }
+}
+</style>

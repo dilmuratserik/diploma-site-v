@@ -252,8 +252,8 @@ export default {
         phone: res.data.phone,
         type: res.data.role,
         storage: res.data.storage,
-        priceType: res.data.type_price,
-        sector: res.data.order_sector,
+        priceType: res.data.price_type.id,
+        sector: res.data.sector_order.id,
         showPlan: res.data.show_plan.toString(),
         scheduleFor: res.data.working_hour_until,
         scheduleFrom: res.data.working_hour_with,
@@ -294,8 +294,8 @@ export default {
       data.append("phone", this.agent.phone);
       data.append("password", this.agent.password);
       data.append("storage", this.agent.storage.id ? this.agent.storage.id : this.agent.storage);
-      data.append("type_price", this.agent.priceType);
-      data.append("order_sector", this.agent.sector);
+      data.append("price_type", this.agent.priceType);
+      data.append("sector_order", this.agent.sector);
       data.append("role", this.agent.type);
       data.append("show_plan", this.agent.showPlan);
       data.append("working_hour_with", this.agent.scheduleFrom);

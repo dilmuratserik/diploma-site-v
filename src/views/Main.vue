@@ -8,7 +8,7 @@
     >
       <v-list dense>
         <div class="d-flex align-center py-4 px-4">
-          <img width="50" height="50" src="@/assets/logo.svg" alt="">
+          <img width="50" height="50" src="@/assets/logo.svg" alt="" />
           <h4 class="text-lg-h5 white--text">Galleon Admin</h4>
         </div>
         <div class="menu">
@@ -16,21 +16,43 @@
             v-for="(item, i) in items"
             :key="i"
             class="menu__item"
-            :class="{ 'menu__item-active': routepath === item.path }"
+            :class="{ 'menu__item-active': routepath.includes(item.path) }"
             tag="div"
             :to="item.path"
           >
             <v-icon color="#A4A6B3" v-text="item.icon"></v-icon>
-            <span style="color: #A4A6B3" v-text="item.text"></span>
+            <span style="color: #a4a6b3" v-text="item.text"></span>
           </router-link>
         </div>
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title>{{ $route.meta.name }}</v-toolbar-title>
+      <v-container fluid>
+        <v-row>
+          <v-col lg="1">
+            <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+          </v-col>
+          <v-col lg="3">
+            <v-toolbar-title style="height: 100%; line-height: 48px">{{
+              $route.meta.name
+            }}</v-toolbar-title>
+          </v-col>
+          <v-col lg="8">
+            <div class="profile__wrapper">
+              <div class="profile">
+                <h4 class="profile__title">Galleon</h4>
+                <v-avatar class="avatar">
+                  <img src="@/assets/logo.svg" alt="avatrt" />
+                </v-avatar>
+                <button @click="logout">
+                  <v-icon>mdi-logout-variant</v-icon>
+                </button>
+              </div>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-app-bar>
 
     <div class="container-custom">
@@ -54,7 +76,7 @@ export default {
         { text: "Товары", icon: "mdi-file-document-edit", path: "/goods" },
         { text: "Оплаты", icon: "mdi-credit-card-outline", path: "/payment" },
         { text: "Визиты", icon: "mdi-clipboard-edit", path: "/visits" },
-        { text: "Карта", icon: "mdi-map-check-outline", path: "/map" },
+        { text: "Карта", icon: "mdi-map-check-outline", path: "/maps" },
         { text: "Сообщение", icon: "mdi-email", path: "/messages" },
         {
           text: "Справочники",
@@ -64,6 +86,12 @@ export default {
         { text: "Настройки", icon: "mdi-cog-outline", path: "/settings" },
       ],
     };
+  },
+  methods: {
+    logout() {
+      sessionStorage.clear();
+      this.$router.push("/login");
+    },
   },
 };
 </script>
@@ -97,7 +125,7 @@ export default {
     }
     &-active {
       border-left: 3px solid #ffffff;
-      background: rgba($color: #9FA2B4, $alpha: 0.4);
+      background: rgba($color: #9fa2b4, $alpha: 0.4);
       span {
         color: #ffffff !important;
       }
@@ -105,6 +133,23 @@ export default {
         color: #ffffff !important;
       }
     }
+  }
+}
+
+.profile__wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  .profile {
+    display: flex;
+    align-items: center;
+    &__title {
+      margin-right: 10px;
+    }
+  }
+  .avatar {
+    margin-right: 30px;
   }
 }
 </style>

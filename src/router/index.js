@@ -54,6 +54,9 @@ const routes = [
     path: "/agents/add",
     name: "addAgent",
     component: () => import("@/views/AgentAdd.vue"),
+    meta: {
+      name: "Торговые агенты",
+    },
   },
   {
     path: "/agents/:id",
@@ -96,6 +99,14 @@ const routes = [
     },
   },
   {
+    path: "/maps",
+    name: "maps",
+    component: () => import("@/views/Map.vue"),
+    meta: {
+      name: "Карта",
+    },
+  },
+  {
     path: "/messages",
     name: "messages",
     component: () => import("@/views/Messages.vue"),
@@ -126,5 +137,13 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if (!sessionStorage.getItem('token') && to.name !== 'Login') {
+    next('/login')
+  } else {
+    next()
+  }
+})
 
 export default router;
