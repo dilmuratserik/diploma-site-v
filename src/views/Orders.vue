@@ -118,7 +118,22 @@
               :items="orders"
               item-key="name"
               class="w-100 elevation-1"
-            ></v-data-table>
+            >
+              <template v-slot:[`item.status`]="{ item }">
+                <template v-if="item.status === 1">
+                  Новый
+                </template>
+                <template v-else-if="item.status === 2">
+                  В обработке
+                </template>
+                <template v-else-if="item.status === 3">
+                  Доставлен
+                </template>
+                <template v-else>
+                  Возврат
+                </template>
+              </template>
+            </v-data-table>
           </v-col>
         </v-row>
       </div>
@@ -128,6 +143,7 @@
 
 <script>
 import Main from "./Main.vue";
+import http from "@/api/http.js"
 export default {
   components: {
     Main,
@@ -141,74 +157,27 @@ export default {
       date2: "",
       items: ["Foo", "Bar", "Fizasddddddd vasdasdz", "Buzz"],
       orderHeaders: [
-        { text: "Номер", value: "number" },
+        { text: "Номер", value: "id" },
         { text: "Точка", value: "point" },
-        { text: "Агент", value: "agent" },
+        { text: "Агент", value: "counterparty.name" },
         { text: "Дата", value: "date" },
         { text: "Вид", value: "type" },
         { text: "Статус", value: "status" },
-        { text: "Курьер", value: "delivery" },
+        { text: "Курьер", value: "courier" },
         { text: "Сумма", value: "total" },
         { text: "Доставка", value: "deliver" },
       ],
-      orders: [
-        {
-          number: "45569",
-          point: "Бегалиев 5, Морошкин магазин",
-          agent: "Маратов Марат",
-          date: "11.03.2021",
-          type: "Заказ",
-          status: "Новый",
-          delivery: "Ахметкалиев Адиль ",
-          total: "70 000",
-          deliver: "12.03.2021",
-        },
-        {
-          number: "45569",
-          point: "Бегалиев 5, Морошкин магазин",
-          agent: "Маратов Марат",
-          date: "11.03.2021",
-          type: "Заказ",
-          status: "Новый",
-          delivery: "Ахметкалиев Адиль ",
-          total: "70 000",
-          deliver: "12.03.2021",
-        },
-        {
-          number: "45569",
-          point: "Бегалиев 5, Морошкин магазин",
-          agent: "Маратов Марат",
-          date: "11.03.2021",
-          type: "Заказ",
-          status: "Новый",
-          delivery: "Ахметкалиев Адиль ",
-          total: "70 000",
-          deliver: "12.03.2021",
-        },
-        {
-          number: "45569",
-          point: "Бегалиев 5, Морошкин магазин",
-          agent: "Маратов Марат",
-          date: "11.03.2021",
-          type: "Заказ",
-          status: "Новый",
-          delivery: "Ахметкалиев Адиль ",
-          total: "70 000",
-          deliver: "12.03.2021",
-        },
-        {
-          number: "45569",
-          point: "Бегалиев 5, Морошкин магазин",
-          agent: "Маратов Марат",
-          date: "11.03.2021",
-          type: "Заказ",
-          status: "Новый",
-          delivery: "Ахметкалиев Адиль ",
-          total: "70 000",
-          deliver: "12.03.2021",
-        },
-      ],
+      orders: [],
     };
   },
+  mounted() {
+    http.get('/order/api/')
+      .then((res) => {
+        this.orders = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 };
 </script>

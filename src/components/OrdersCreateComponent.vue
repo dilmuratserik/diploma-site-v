@@ -121,7 +121,44 @@
               ></v-breadcrumbs>
             </v-row>
             <v-row>
-              
+              <v-col>
+                <v-select :items="items" label="Категория" outlined dense></v-select>
+              </v-col>
+              <v-col>
+                <v-select :items="items" label="Статус" outlined dense></v-select>
+              </v-col>
+              <v-col>
+                <v-text-field v-model.lazy="queryParams.search" placeholder="Поиск" outlined dense></v-text-field>
+              </v-col>
+              <v-col>
+                <v-btn class="white--text px-8" color="#196643">Завершить</v-btn>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-data-table
+                class="w-100 elevation-1"
+                style="width: 100%"
+                :headers="productsHeader"
+                :items="products"
+                item-key="name"
+              >
+                <template v-slot:[`item.category`]="{ item }">
+                  {{ categories.filter((el) => item.category === el.id)[0].name }}
+                </template>
+                <template v-slot:[`item.count`]="{ item }">
+                  <div>
+                    <v-btn color="#196643" outlined @click="countDown(item)">-</v-btn>
+                    <button style="width: 60px">{{ item.counter }}</button>
+                    <v-btn color="#196643" outlined @click="countUp(item)">+</v-btn>
+                  </div>
+                </template>
+                <template v-slot:[`item.status`]="{ item }">
+                  {{ item.status === 1 ? "В наличии" : "Нет в наличии" }}
+                </template>
+                <template v-slot:[`item.action`]="{ item }">
+                  <v-btn color="#196643" @click.prevent="addToCart(item)" outlined>Добавить</v-btn>
+                </template>
+              </v-data-table>
             </v-row>
           </v-container>
         </v-stepper-content>
@@ -132,25 +169,80 @@
 
 <script>
 import Main from "@/views/Main.vue";
+import http from "@/api/http.js";
 export default {
   components: {
     Main,
   },
   data() {
     return {
+      orderStepper: 2,
       orderDateMenu: null,
       orderDate: null,
       deliveryDateMenu: null,
       deliveryDate: null,
       orderContent: [],
-      items: ["Foo", "Bar", "Fizasddddddd vasdasdz", "Buzz"],
+      items: ["По умолчанию", "Foo", "Bar", "Fizasddddddd vasdasdz", "Buzz"],
       breadcrumbs: [
         { text: "Добавление заказа", disabled: true },
         { text: "Добавление товаров", disabled: false },
       ],
-      orderStepper: 2,
+      productsHeader: [
+        { text: "Название", value: "name" },
+        { text: "Категория", value: "category" },
+        { text: "Цена", value: "price" },
+        { text: "Количество", value: "count" },
+        { text: "Статус", value: "status" },
+        { text: "", value: "action" }
+      ],
+      products: [],
+      categories: [],
+      queryParams: {
+        search: ""
+      },
     };
   },
+  mounted() {
+    http.get('/category/list/')
+      .then((res) => {
+        this.categories = res.data.category
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    http.get('/product/')
+      .then((res) => {
+        res.data.results.forEach(product => {
+          this.products.push({
+            ...product,
+            counter: 1,
+            totalPrice: product.price,
+          })
+        });
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
+  methods: {
+    addToCart(product) {
+      console.log(product)
+    },
+    countUp(product) {
+      this.products.forEach((el) => {
+        if (product.id === el.id) {
+          el.counter += 1
+        }
+      })
+    },
+    countDown(product) {
+      this.products.forEach((el) => {
+        if (product.id === el.id && el.counter !== 1) {
+          el.counter -= 1
+        }
+      })
+    }
+  }
 };
 </script>
 
